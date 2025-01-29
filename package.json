@@ -1,0 +1,16 @@
+{
+  "name": "foreign-team-allow-qllof",
+  "productName": "foreign-team-allow-qllof",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "alicejoynson-ellis",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "33.3.0"
+  }
+}

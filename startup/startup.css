@@ -1,0 +1,51 @@
+body {
+    /* Use this to centre items horizontally and vertically */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* Set the font family and size to be easily readable.*/
+    font-family: helvetica, sans-serif;
+
+    /* Align the items inside of the webpage */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#title {
+    font-size: 300%;
+    text-align: center;
+}
+
+#server-select-container {
+    /* Properly align the divs so they are one after the other */
+    display: flex;
+    flex-direction: column;
+
+    /* Align the items horizontally.*/
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#server-select-buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2px;
+}
+
+#server-select-buttons button {
+    width: 50%;
+}
+
+#server-select-container button, select {
+    /* Change the size of these elements individually to better match the page */
+    font-size: 100%;
+    padding: 16px;
+}
+
+#add-server-modal h1, form{
+    margin-left: 5%;
+}

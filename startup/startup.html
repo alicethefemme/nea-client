@@ -1,0 +1,50 @@
+<!-- Empty -->
+<!DOCTYPE html>
+<html lang="EN/US">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="startup.css">
+    <script type="text/javascript" src="startup.js"></script>
+    <title>Server Commander - Startup</title>
+</head>
+<body>
+<h1 id="title"> Select Server </h1>
+<div id="server-select-container">
+    <div id="server-select-drop">
+        <!-- Dropdown menu for which server to use -->
+        <select name="Server" id="server">
+            <option value="" disabled selected>Select Server</option> <!-- Placehoder text -->
+            <!-- The options below will be auto-populated with options from the datastore -->
+        </select>
+        <button type="button" id="connectToServer"> Connect</button>
+    </div>
+    <div id="server-select-buttons">
+        <button type="button" id="addServer"> Add Server</button>
+        <button type="button" id="editServer"> Edit Server</button>
+    </div>
+</div>
+
+<div id="add-server-modal" class="modal">
+    <h1> Add server </h1>
+    <span class="close"> X </span>
+    <form id="add-server-modal-form">
+        <!-- Server Name -->
+        <label for="add-server-modal-server-name"> Server Name </label>
+        <input id="add-server-modal-server-name" type="text" placeholder="Server Name" name="server-name" required><br><br>
+        <!-- Server address -->
+        <label for="add-server-modal-server-address"> Server Address: </label>
+        <input id="add-server-modal-server-address" type="text" placeholder="0.0.0.0" name="server-address" required><br><br>
+        <!-- Username -->
+        <label for="add-server-modal-server-username"> Username: </label>
+        <input id="add-server-modal-server-username" type="text" placeholder="johnsmith" name="server-username" required><br><br>
+        <!-- Password -->
+        <label for="add-server-modal-server-password"> Password: </label>
+        <input id="add-server-modal-server-password" type="password" placeholder="password123" name="server-password" required><br><br>
+        <!-- Submit form -->
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+</body>
+</html>

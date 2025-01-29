@@ -1,0 +1,32 @@
+/* styles.css */
+
+/* Add styles here to customize the appearance of your app */
+
+.modal {
+    display: none; /* hide by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 90%; /* Set to 80 due to the margin */
+    height: 85%;
+
+    background-color: rgb(220, 220, 220); /* fallback colour */
+    background-color: rgba(220, 220, 220, 0.95);
+
+    margin: 5%;
+}
+
+.close {
+    display: block;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 30px;
+    text-align: center;
+
+    color: white;
+    background-color: rgb(220, 30, 30)
+}
