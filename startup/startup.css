@@ -46,6 +46,12 @@ body {
     padding: 16px;
 }
 
-#add-server-modal h1, form{
+#add-server-modal, #edit-server-modal h1, form{
     margin-left: 5%;
+}
+
+#add-server-modal-back-button, #edit-server-modal-back-button {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
