@@ -2,6 +2,28 @@
 
 /* Add styles here to customize the appearance of your app */
 
+/* Color theme:
+Main: rgb(64, 66, 88)
+Sub window(s): rgb(71, 78, 104)
+Buttons: rgb(80, 87, 122)
+Main color: rgb(107, 114, 142)
+Text: rgb(255, 255, 255)
+ */
+
+body {
+    background-color: rgb(64, 66, 88);
+    color: rgb(255, 255, 255);
+}
+
+button, select {
+    background-color: rgb(80, 87, 122);
+    color: rgb(255, 255, 255);
+
+    border-width: 1px;
+    border-color: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
 .modal {
     display: none; /* hide by default */
     position: fixed;
@@ -10,8 +32,8 @@
     width: 90%; /* Set to 80 due to the margin */
     height: 85%;
 
-    background-color: rgb(220, 220, 220); /* fallback colour */
-    background-color: rgba(220, 220, 220, 0.95);
+    background-color: rgb(71, 78, 104); /* fallback colour */
+    background-color: rgba(71, 78, 104, 0.97);
 
     margin: 5%;
 
