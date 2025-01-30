@@ -3,6 +3,7 @@
 <html lang="EN/US">
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="startup.css">
     <script type="text/javascript" src="startup.js"></script>
@@ -13,6 +14,7 @@
 <div id="server-select-container">
     <div id="server-select-drop">
         <!-- Dropdown menu for which server to use -->
+        <label for="server" hidden>Select server</label>
         <select name="Server" id="server">
             <option value="" disabled selected>Select Server</option> <!-- Placehoder text -->
             <!-- The options below will be auto-populated with options from the datastore -->
@@ -30,21 +32,28 @@
     <form id="add-server-modal-form">
         <!-- Server Name -->
         <label for="add-server-modal-server-name"> Server Name: </label>
-        <input id="add-server-modal-server-name" type="text" placeholder="Server Name" name="server-name" required><br><br>
+        <input id="add-server-modal-server-name" type="text" placeholder="Server Name" name="server-name"
+               required><br><br>
         <!-- Server address -->
         <label for="add-server-modal-server-address"> Server Address: </label>
-        <input id="add-server-modal-server-address" type="text" placeholder="0.0.0.0" name="server-address" required><br><br>
+        <input id="add-server-modal-server-address" type="text" placeholder="0.0.0.0" name="server-address"
+               required><br><br>
         <!-- Username -->
         <label for="add-server-modal-server-username"> Username: </label>
-        <input id="add-server-modal-server-username" type="text" placeholder="johnsmith" name="server-username" required><br><br>
+        <input id="add-server-modal-server-username" type="text" placeholder="johnsmith" name="server-username"
+               required><br><br>
         <!-- Password -->
         <label for="add-server-modal-server-password"> Password: </label>
-        <input id="add-server-modal-server-password" type="password" placeholder="password123" name="server-password" required><br><br>
+        <input id="add-server-modal-server-password" type="password" placeholder="password123" name="server-password"
+               required><br><br>
         <!-- Submit form -->
         <input type="submit" value="Submit">
     </form>
 </div>
 <div id="edit-server-modal" class="modal">
+    <div id="edit-server-modal-back-button">
+        <span class="material-icons">arrow_back</span>
+    </div><br>
     <h1> Edit Server </h1>
     <form id="edit-server-modal-form">
         <!-- Server name -->
@@ -52,15 +61,19 @@
         <input id="edit-server-modal-server-name" type="text" placeholder="Server Name" name="server-name" required><br><br>
         <!-- Server address -->
         <label for="edit-server-modal-server-address"> Server Address: </label>
-        <input id="edit-server-modal-server-address" type="text" placeholder="0.0.0.0" name="server-address" required><br><br>
+        <input id="edit-server-modal-server-address" type="text" placeholder="0.0.0.0" name="server-address"
+               required><br><br>
         <!-- Username -->
         <label for="edit-server-modal-server-username"> Username: </label>
-        <input id="edit-server-modal-server-username" type="text" placeholder="johnsmith" name="server-username" required><br><br>
+        <input id="edit-server-modal-server-username" type="text" placeholder="johnsmith" name="server-username"
+               required><br><br>
         <!-- Password -->
         <label for="edit-server-modal-server-password"> Password: </label>
-        <input id="edit-server-modal-server-password" type="text" placeholder="password123" name="server-password" required><br><br>
+        <input id="edit-server-modal-server-password" type="text" placeholder="password123" name="server-password"
+               required><br><br>
         <!-- Submit form -->
         <input type="submit" value="Submit">
+        <input type="reset">
     </form>
 </div>
 
