@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', function() { // Wait for the docum
 
     document.getElementById("connectToServer").onclick = function () {connectServer()};
 
+    const title = 'Server Commander';
+    const startupTitle = `${title} - Startup`;
+    const addServerTitle = `${title} - Add Server`;
+    const editServerTitle = `${title} - Edit Server`;
+
     // Get the select box, and add 10 servers to it.
     const serverSelect = document.getElementById("server")
     for (let i = 0; i < 10; i++) {
@@ -23,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() { // Wait for the docum
      */
     function addServer() {
         document.getElementById("add-server-modal").style.display = "block"; // Show the modal
+        document.title = addServerTitle; // Set the window title.
     }
 
     /*
@@ -31,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() { // Wait for the docum
     function addServerBackButton() {
         document.getElementById("add-server-modal").style.display = "none"; // Hide the modal
         document.getElementById("edit-server-modal-form").reset(); // Reset the information in the form.
+        document.title = startupTitle; // Restore the startup title.
     }
 
     /*
@@ -38,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() { // Wait for the docum
      */
     function editServer() {
         document.getElementById("edit-server-modal").style.display = "block"; // Show the modal
+        document.title = editServerTitle; // Set the window title.
     }
 
     /*
@@ -46,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() { // Wait for the docum
     function editServerBackButton() {
         document.getElementById("edit-server-modal").style.display = "none"; // Hide the modal
         document.getElementById("edit-server-modal-form").reset(); // Reset the information in the form.
+        document.title = startupTitle; // Restore the startup title.
     }
 
     function connectServer() {
