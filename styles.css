@@ -5,7 +5,6 @@
 .modal {
     display: none; /* hide by default */
     position: fixed;
-    top: 0;
     left: 0;
 
     width: 90%; /* Set to 80 due to the margin */
@@ -15,4 +14,6 @@
     background-color: rgba(220, 220, 220, 0.95);
 
     margin: 5%;
+
+    border-radius: 10px;
 }

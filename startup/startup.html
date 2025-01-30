@@ -16,7 +16,7 @@
         <!-- Dropdown menu for which server to use -->
         <label for="server" hidden>Select server</label>
         <select name="Server" id="server">
-            <option value="" disabled selected>Select Server</option> <!-- Placehoder text -->
+            <option value="" disabled selected>Select Server</option> <!-- Placeholder text -->
             <!-- The options below will be auto-populated with options from the datastore -->
         </select>
         <button type="button" id="connectToServer"> Connect</button>
@@ -28,6 +28,9 @@
 </div>
 
 <div id="add-server-modal" class="modal">
+    <div id="add-server-modal-back-button">
+        <span class="material-icons">arrow_back</span>
+    </div><br>
     <h1> Add server </h1>
     <form id="add-server-modal-form">
         <!-- Server Name -->
@@ -49,6 +52,8 @@
         <!-- Submit form -->
         <input type="submit" value="Submit">
     </form>
+    <!-- Status message for adding a server -->
+    <p id="add-server-modal-status-message"></p>
 </div>
 <div id="edit-server-modal" class="modal">
     <div id="edit-server-modal-back-button">
@@ -75,6 +80,8 @@
         <input type="submit" value="Submit">
         <input type="reset">
     </form>
+    <!-- Status message for editing a server -->
+    <p id="edit-server-modal-status-message"></p>
 </div>
 
 </body>

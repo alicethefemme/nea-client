@@ -46,7 +46,15 @@ body {
     padding: 16px;
 }
 
-#add-server-modal, #edit-server-modal h1, form{
+#add-server-modal, #edit-server-modal {
+    height: auto;
+}
+
+#add-server-modal h1, form {
+    margin-left: 5%;
+}
+
+#edit-server-modal h1, form {
     margin-left: 5%;
 }
 
@@ -54,4 +62,9 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+
+    padding: 5px;
+    background-color: rgb(180, 180, 180);
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
