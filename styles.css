@@ -16,17 +16,3 @@
 
     margin: 5%;
 }
-
-.close {
-    display: block;
-
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    width: 30px;
-    text-align: center;
-
-    color: white;
-    background-color: rgb(220, 30, 30)
-}
