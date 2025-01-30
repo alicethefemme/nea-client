@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' googleapis.com; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block">
     <link href="./styles.css" rel="stylesheet">
+    <link href="styles/index.css" rel="stylesheet">
     <title>Hello World!</title>
-  </head>
-  <body>
-    <div id="sidebar">
-      <p> This will be a left sidebar!</p>
+</head>
+<body>
+<!-- Sidebar to show the menu options -->
+<div id="sidebar">
+    <p> This will be a left sidebar!</p>
+    <div id="sidebar-settings-button">
+        <span class="material-icons">settings</span>
+        <span> Settings </span>
     </div>
+</div>
+
+<div class="right">
+    <!-- Content div to show the main content and graphs of the page -->
     <div id="content">
-      <p> This will be the main page! </p>
+        <p> This will be the main page! </p>
     </div>
+    <!-- Info panel to show more information on the selected elements -->
     <div id="info-panel">
-      <p> This will be the right information panel!</p>
+        <p> This will be the right information panel!</p>
     </div>
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
+</div>
+<!-- You can also require other files to run in this process -->
+<script src="./renderer.js"></script>
+</body>
 </html>
