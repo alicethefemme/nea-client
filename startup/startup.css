@@ -6,9 +6,6 @@ body {
     left: 0;
     right: 0;
 
-    /* Set the font family and size to be easily readable.*/
-    font-family: helvetica, sans-serif;
-
     /* Align the items inside of the webpage */
     display: flex;
     flex-direction: column;

@@ -11,8 +11,12 @@ Text: rgb(255, 255, 255)
  */
 
 body {
+    /* Set the colours to match the theming */
     background-color: rgb(64, 66, 88);
     color: rgb(255, 255, 255);
+
+    /* Set the font family and size to be easily readable.*/
+    font-family: helvetica, sans-serif;
 }
 
 button, select {
