@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(event) {
+document.addEventListener('DOMContentLoaded', function(event) { // Wait for the document to be loaded. Has to be used as the script is referenced in the head of the file.
 
     // Get all the buttons and add their functions.
     document.getElementById("addServer").onclick = function () {addServer()};
@@ -16,21 +16,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
     function addServer() {
-        document.getElementById("add-server-modal").style.display = "block";
+        document.getElementById("add-server-modal").style.display = "block"; // Show the modal
     }
 
     function editServer() {
-        alert("You have edited a server!");
+        document.getElementById("edit-server-modal").style.display = "block"; // Show the modal
     }
 
     function connectServer() {
-        const val = document.getElementById("server").value;
+        const val = document.getElementById("server").value; // Get the dropdown box.
 
         // Check that the value of the item is valid
-        if (val === "") {
+        if (val === "") { // If the value hasn't been set.
             alert("Please select a valid server!");
         } else {
-            alert(`You have connected to Server ${val}!`); // Use backticks to do string formatting here.
+            alert(`You have connected to Server ${val}!`); // Use backticks to do string formatting here. Inform user of the server they have connected to.
         }
     }
 })
