@@ -9,7 +9,9 @@ body {
     margin-left: 0;
     margin-right: 10px;
 
-    border-right: 2px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(255, 255, 255);
+
+    position: relative; /* required to configure the settings div to be in the bottom left.*/
 }
 
 #right {
@@ -17,12 +19,19 @@ body {
 }
 
 #sidebar-settings-button {
-    width: 100%;
-    height: 10vh;
-    border-top: 2px solid rgb(0, 0, 0);
-    border-bottom: 2px solid black;
-}
+    /* used to set the bottom position */
+    position: absolute;
+    bottom: 0;
 
+    /* set the style of the div */
+    width: 100%;
+    height: 7vh;
+    border-top: 1px solid rgb(255, 255, 255);
+
+    /* set the spans to be in the middle */
+    display: grid;
+    align-items: center;
+}
 #sidebar-settings-button span {
     vertical-align: middle;
 }
