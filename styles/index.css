@@ -54,3 +54,23 @@ body {
     width: 50%;
     border: 1px solid rgb(255, 255, 255);
 }
+
+.active {
+    background-color: rgb(80, 87, 122);
+}
+
+.hover {
+    background-color: rgb(71, 78, 104);
+}
+
+#sidebar-overview-button {
+    /*Set the way the button will be displayed.*/
+    display: block;
+    padding: 10px;
+
+    /*Align the text inside the button.*/
+    vertical-align: center;
+    text-align: center;
+
+    border: 1px solid rgb(255, 255, 255);
+}
