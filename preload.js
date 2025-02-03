@@ -6,6 +6,9 @@
  *
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
+
+const { contextBridge, ipcRenderer } = require('electron');
+
 window.addEventListener('DOMContentLoaded', () => {
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector)
@@ -15,4 +18,15 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const type of ['chrome', 'node', 'electron']) {
     replaceText(`${type}-version`, process.versions[type])
   }
-})
+});
+
+contextBridge.exposeInMainWorld('electron', {
+  send: (channel, data) => {
+    const validChannels = ['load-main'];
+    console.log(`Channel ${channel} has been called.`)
+    if (validChannels.includes(channel)) {
+      ipcRenderer.send(channel, data)
+    }
+  },
+  receive: (channel, callback) => ipcRenderer.on(channel, callback)
+});

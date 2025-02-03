@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() { // Wait for the document to be loaded. Has to be used as the script is referenced in the head of the file.
 
     // Get all the buttons and add their functions.
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() { // Wait for the docum
         if (val === "") { // If the value hasn't been set.
             alert("Please select a valid server!");
         } else {
-            alert(`You have connected to Server ${val}!`); // Use backticks to do string formatting here. Inform user of the server they have connected to.
+            window.electron.send('load-main'); // Send the message to the IPC to load the main window.
         }
     }
 })
