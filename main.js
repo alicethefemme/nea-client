@@ -28,6 +28,14 @@ function createStartupWindow () {
     mainWindow.loadFile("index.html"); // Load the file into the main window which was defined.
   });
 
+  ipcMain.on('load-settings-menu', () => {
+    let window = new BrowserWindow({
+      width: 800,
+      height: 600,
+      resizable: false
+    })
+  })
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
