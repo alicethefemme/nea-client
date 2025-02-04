@@ -7,23 +7,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.title = mainTitle;
 
-    document.getElementById("sidebar-overview-button").onclick = function() {
-        //document.getElementById("sidebar-overview-button").setAttribute('class', 'active'); // Use this piece of code to set the class to active, rendering it the current item.
+    // Apply a mouseover and mouseout function to all the items in the sidebar, so that they highlight.
+    for(let child of document.getElementById('sidebar').children) {
+        if (child.id.endsWith('settings-button')) {continue;}
+        child.onmouseover = function() {
+            if (child.className !== 'sidebar-button active') {
+                child.setAttribute('class', 'sidebar-button hover');
+            }
+        };
+        child.onmouseout = function() {
+            if (child.className !== 'sidebar-button active') {
+                child.setAttribute('class', 'sidebar-button')
+            }
+        };
     }
-
-    // TODO: Fix code here.
-    // // Automatically set the hover for any hovered over button
-    // document.onmouseover = function(ev) { // On any mouse over event.
-    //     let element = ev.target;
-    //     if (element.parent.id === "sidebar") { // If the element has a parent of the sidebar.
-    //         element.setAttribute('class', 'hover'); // Sets the hover colour
-    //     }
-    // }
-    // // Automatically clear the hover for any button
-    // document.onmouseout = function(ev) { // On any mouse out event.
-    //     let element = ev.target;
-    //     if(element.parent.id === "sidebar") { // If the element has a parent of the sidebar.
-    //         element.removeAttribute('class'); // Removes the class of active.
-    //     }
-    // }
 })
