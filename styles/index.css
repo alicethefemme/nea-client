@@ -57,6 +57,7 @@ body {
 
 .active {
     background-color: rgb(80, 87, 122);
+    font-style: italic;
 }
 
 .hover {
@@ -68,7 +69,21 @@ body {
     display: block;
     padding: 10px;
 
+    /*Set the font changes*/
+    font-size: 20px;
+    font-weight: bold;
+
     /*Align the text inside the button.*/
     vertical-align: center;
     text-align: center;
+}
+
+/*Set to overview default show, as this is the default startup panel.*/
+#overview {
+    display: block;
+}
+
+/*Automatically hide all sections of the content, so that only the one which is meant to be visible will be*/
+.content-section {
+    display: none;
 }

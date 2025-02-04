@@ -8,6 +8,7 @@
     <title>Server Commander - Main</title>
 
     <script src="./js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
 </head>
 <body>
 <!-- Sidebar to show the menu options -->
@@ -15,8 +16,14 @@
     <div id="sidebar-overview-button" class="sidebar-button active">
         <span> Overview </span>
     </div>
-    <div id="sidebar-network-button" class="sidebar-button">
-        <span> Network </span>
+    <div id="sidebar-system-information-button" class="sidebar-button">
+        <span> System Information </span>
+    </div>
+    <div id="sidebar-network-information-button" class="sidebar-button">
+        <span> Network Information </span>
+    </div>
+    <div id="sidebar-docker-button" class="sidebar-button">
+        <span> Docker </span>
     </div>
     <div id="sidebar-settings-button">
         <div style="display: block; text-align: center;">
@@ -29,7 +36,19 @@
 <div id="right">
     <!-- Content div to show the main content and graphs of the page -->
     <div id="content">
-        <p> This will be the main page! </p>
+        <div id="overview" class="content-section">
+            <p> Overview </p>
+            <canvas id="overview-cpu"></canvas>
+        </div>
+        <div id="system-information" class="content-section">
+            <p> System Information </p>
+        </div>
+        <div id="network-information" class="content-section">
+            <p> Network Information </p>
+        </div>
+        <div id="docker" class="content-section">
+            <p> Docker </p>
+        </div>
     </div>
     <!-- Info panel to show more information on the selected elements -->
     <div id="info-panel">
