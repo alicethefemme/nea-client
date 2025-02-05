@@ -8,13 +8,21 @@
  * Document for UI elements
  */
 
+
+const title = 'Server Commander';
+const overviewTitle = `${title} - Overview`;
+const systemInformationTitle = `${title} - System Information`
+const networkInformationTitle = `${title} - Network Information`
+const dockerTitle = `${title} - Docker`
+
+const titles = new Map();
+titles.set('overview', overviewTitle);
+titles.set('system-information',systemInformationTitle);
+titles.set('network-information', networkInformationTitle);
+titles.set('docker', dockerTitle);
+
 let active = 'sidebar-overview-button';
-
-// Run this every second.
-setInterval(function() {
-    document.getElementById("testtest").innerText = Date.now().toString();
-}, getSeconds(1)) // Time out is in milliseconds.
-
+document.title = titles.get(sidebarReplace(active));
 
 // Apply a mouseover and mouseout function to all the items in the sidebar, so that they highlight. Change title on active.
 for (let child of document.getElementById('sidebar').children) { // For all the children in the sidebar.
@@ -46,6 +54,7 @@ for (let child of document.getElementById('sidebar').children) { // For all the 
         // Update main display
         if(sidebarReplace(active) !== "settings") {
             document.getElementById(sidebarReplace(active)).style.display = 'block'; // Show the menu.
+            document.title = titles.get(sidebarReplace(active)); // Set the new title.
         }
     }
 }
