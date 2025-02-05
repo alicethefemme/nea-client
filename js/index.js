@@ -1,14 +1,14 @@
+/**
+ * Use this file to run any logic for the webpage.
+ */
 
-// Document to be used for the main logic of the index file.
+let cpuData = []
 
-document.addEventListener('DOMContentLoaded', function () {
-    const title = 'Server Commander';
-    const mainTitle = `${title} - Main`;
+let labels = ['30', '25', '20', '15', '10', '5', '0'];
+let data = {data: [10, 20, 30, 20, 10, 20, 30]};
+const cpuChart = window.generateGraph('overview-cpu', labels, )
 
-    const overview = `${title} - Overview`;
-
-    let active = 'sidebar-overview-button';
-
-    document.title = mainTitle;
-})
-
+// Run this every second.
+setInterval(function() {
+    document.getElementById("testtest").innerText = Date.now().toString();
+}, getSeconds(1)) // Time out is in milliseconds.
