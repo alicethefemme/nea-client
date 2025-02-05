@@ -6,7 +6,6 @@
     <link href="./styles.css" rel="stylesheet">
     <link href="styles/index.css" rel="stylesheet">
     <title>Server Commander - Main</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
 </head>
 <body>
 <!-- Sidebar to show the menu options -->
@@ -21,7 +20,7 @@
         <span class="material-icons">settings_ethernet</span><span> Network Information </span>
     </div>
     <div id="sidebar-docker-button" class="sidebar-button">
-        <span style="vertical-align: center"><img src="assets/docker.svg" width="24px" height="24px"></span><span> Docker </span>
+        <span style="vertical-align: center"><img src="assets/docker.svg" width="24px" height="24px" alt="Docker icon"></span><span> Docker </span>
     </div>
     <div id="sidebar-settings-button">
         <div style="display: block; text-align: center;">
@@ -35,7 +34,7 @@
     <!-- Content div to show the main content and graphs of the page -->
     <div id="content">
         <div id="overview" class="content-section">
-            <canvas id="overview-cpu"></canvas><span>CPU Overview</span>
+            <canvas id="overview-cpu" style="width: 50%"></canvas><span>CPU Overview</span>
             <canvas id="overview-gpu"></canvas><span>GPU Overview</span>
             <canvas id="overview-ram"></canvas><span>RAM Overview</span>
         </div>

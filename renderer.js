@@ -8,55 +8,75 @@
  * Document for UI elements
  */
 
+window.onload = () => {
+    const title = 'Server Commander';
+    const overviewTitle = `${title} - Overview`;
+    const systemInformationTitle = `${title} - System Information`
+    const networkInformationTitle = `${title} - Network Information`
+    const dockerTitle = `${title} - Docker`
 
-const title = 'Server Commander';
-const overviewTitle = `${title} - Overview`;
-const systemInformationTitle = `${title} - System Information`
-const networkInformationTitle = `${title} - Network Information`
-const dockerTitle = `${title} - Docker`
+    const titles = new Map();
+    titles.set('overview', overviewTitle);
+    titles.set('system-information',systemInformationTitle);
+    titles.set('network-information', networkInformationTitle);
+    titles.set('docker', dockerTitle);
 
-const titles = new Map();
-titles.set('overview', overviewTitle);
-titles.set('system-information',systemInformationTitle);
-titles.set('network-information', networkInformationTitle);
-titles.set('docker', dockerTitle);
-
-let active = 'sidebar-overview-button';
-document.title = titles.get(sidebarReplace(active));
+    let active = 'sidebar-overview-button';
+    document.title = titles.get(sidebarReplace(active));
 
 // Apply a mouseover and mouseout function to all the items in the sidebar, so that they highlight. Change title on active.
-for (let child of document.getElementById('sidebar').children) { // For all the children in the sidebar.
-    child.onmouseover = function () {
-        if (!child.className.includes('active')) { // If there is not an active class applied.
-            child.setAttribute('class', `${child.className} hover`); // Add the hover effect.
-        }
-    };
-    child.onmouseout = function () {
-        if (!child.className.includes('active')) { // If there is not an active class applied
-            child.setAttribute('class', child.className.replace('hover', '')) // Remove the hover class
-        }
-    };
-    child.onclick = function () {
+    for (let child of document.getElementById('sidebar').children) { // For all the children in the sidebar.
+        child.onmouseover = function () {
+            if (!child.className.includes('active')) { // If there is not an active class applied.
+                child.setAttribute('class', `${child.className} hover`); // Add the hover effect.
+            }
+        };
+        child.onmouseout = function () {
+            if (!child.className.includes('active')) { // If there is not an active class applied
+                child.setAttribute('class', child.className.replace('hover', '')) // Remove the hover class
+            }
+        };
+        child.onclick = function () {
 
-        // Remove the active from the button.
-        let prevActive = document.getElementById(active)
-        prevActive.setAttribute('class', prevActive.className
-            .replace('active', '')
-            .replace('hover', '')); // Get rid of the active and the hover classes.
-        if(sidebarReplace(prevActive.id) !== 'settings') { // If the button isn't settings
-            document.getElementById(sidebarReplace(prevActive.id)).style.display = 'none'; // Hide its menu
-        }
+            // Remove the active from the button.
+            let prevActive = document.getElementById(active)
+            prevActive.setAttribute('class', prevActive.className
+                .replace('active', '')
+                .replace('hover', '')); // Get rid of the active and the hover classes.
+            if(sidebarReplace(prevActive.id) !== 'settings') { // If the button isn't settings
+                document.getElementById(sidebarReplace(prevActive.id)).style.display = 'none'; // Hide its menu
+            }
 
-        // Add the active to the new button.
-        child.setAttribute('class', `${child.className} active`);
-        active = child.id;
+            // Add the active to the new button.
+            child.setAttribute('class', `${child.className} active`);
+            active = child.id;
 
-        // Update main display
-        if(sidebarReplace(active) !== "settings") {
-            document.getElementById(sidebarReplace(active)).style.display = 'block'; // Show the menu.
-            document.title = titles.get(sidebarReplace(active)); // Set the new title.
+            // Update main display
+            if(sidebarReplace(active) !== "settings") {
+                document.getElementById(sidebarReplace(active)).style.display = 'block'; // Show the menu.
+                document.title = titles.get(sidebarReplace(active)); // Set the new title.
+            }
         }
     }
+
+    const myChart = new Chart(document.getElementById('overview-cpu').getContext('2d'), { // Create a new chart and provide it the 2D context of the chart object in HTML.
+        type: 'line',
+        data: {
+            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            datasets: [{
+                label: 'CPU',
+                data: [50, 40, 50, 45, 46, 47, 48, 49, 50, 51]
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 }
 
 
