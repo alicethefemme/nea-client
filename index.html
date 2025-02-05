@@ -14,16 +14,16 @@
 <!-- Sidebar to show the menu options -->
 <div id="sidebar">
     <div id="sidebar-overview-button" class="sidebar-button active">
-        <span> Overview </span>
+        <span class="material-icons">analytics</span><span> Overview </span>
     </div>
     <div id="sidebar-system-information-button" class="sidebar-button">
-        <span> System Information </span>
+        <span class="material-icons">dns</span><span> System Information </span>
     </div>
     <div id="sidebar-network-information-button" class="sidebar-button">
-        <span> Network Information </span>
+        <span class="material-icons">settings_ethernet</span><span> Network Information </span>
     </div>
     <div id="sidebar-docker-button" class="sidebar-button">
-        <span> Docker </span>
+        <span style="vertical-align: center"><img src="assets/docker.svg" width="24px" height="24px"></span><span> Docker </span>
     </div>
     <div id="sidebar-settings-button">
         <div style="display: block; text-align: center;">
@@ -37,8 +37,9 @@
     <!-- Content div to show the main content and graphs of the page -->
     <div id="content">
         <div id="overview" class="content-section">
-            <p> Overview </p>
-            <canvas id="overview-cpu"></canvas>
+            <canvas id="overview-cpu"></canvas><span>CPU Overview</span>
+            <canvas id="overview-gpu"></canvas><span>GPU Overview</span>
+            <canvas id="overview-ram"></canvas><span>RAM Overview</span>
         </div>
         <div id="system-information" class="content-section">
             <p> System Information </p>
@@ -52,7 +53,7 @@
     </div>
     <!-- Info panel to show more information on the selected elements -->
     <div id="info-panel">
-        <p> This will be the right information panel!</p>
+        <p id="testtest"> This will be the right information panel!</p>
     </div>
 </div>
 <!-- You can also require other files to run in this process -->
