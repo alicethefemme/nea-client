@@ -5,12 +5,24 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block">
     <link href="./styles.css" rel="stylesheet">
     <link href="styles/index.css" rel="stylesheet">
-    <title>Hello World!</title>
+    <title>Server Commander - Main</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
 </head>
 <body>
 <!-- Sidebar to show the menu options -->
 <div id="sidebar">
-    <p> This will be a left sidebar!</p>
+    <div id="sidebar-overview-button" class="sidebar-button active">
+        <span class="material-icons">analytics</span><span> Overview </span>
+    </div>
+    <div id="sidebar-system-information-button" class="sidebar-button">
+        <span class="material-icons">dns</span><span> System Information </span>
+    </div>
+    <div id="sidebar-network-information-button" class="sidebar-button">
+        <span class="material-icons">settings_ethernet</span><span> Network Information </span>
+    </div>
+    <div id="sidebar-docker-button" class="sidebar-button">
+        <span style="vertical-align: center"><img src="assets/docker.svg" width="24px" height="24px"></span><span> Docker </span>
+    </div>
     <div id="sidebar-settings-button">
         <div style="display: block; text-align: center;">
             <span class="material-icons">settings</span>
@@ -22,14 +34,30 @@
 <div id="right">
     <!-- Content div to show the main content and graphs of the page -->
     <div id="content">
-        <p> This will be the main page! </p>
+        <div id="overview" class="content-section">
+            <canvas id="overview-cpu"></canvas><span>CPU Overview</span>
+            <canvas id="overview-gpu"></canvas><span>GPU Overview</span>
+            <canvas id="overview-ram"></canvas><span>RAM Overview</span>
+        </div>
+        <div id="system-information" class="content-section">
+            <p> System Information </p>
+        </div>
+        <div id="network-information" class="content-section">
+            <p> Network Information </p>
+        </div>
+        <div id="docker" class="content-section">
+            <p> Docker </p>
+        </div>
     </div>
     <!-- Info panel to show more information on the selected elements -->
     <div id="info-panel">
-        <p> This will be the right information panel!</p>
+        <p id="testtest"> This will be the right information panel!</p>
     </div>
 </div>
 <!-- You can also require other files to run in this process -->
 <script src="./renderer.js"></script>
+<script src="./js/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart JS wasn't working inside the preload so included it here.
+
 </body>
 </html>
