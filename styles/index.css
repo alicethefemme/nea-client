@@ -14,6 +14,8 @@ body {
     border-right: 1px solid rgb(255, 255, 255);
 
     position: relative; /* required to configure the settings div to be in the bottom left.*/
+
+    user-select: none;
 }
 
 #sidebar-settings-button {
@@ -47,6 +49,7 @@ body {
 
 #content {
     width: 100%;
+    display: grid
 }
 
 #info-panel {
