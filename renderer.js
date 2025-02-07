@@ -17,7 +17,7 @@ window.onload = () => {
 
     const titles = new Map();
     titles.set('overview', overviewTitle);
-    titles.set('system-information',systemInformationTitle);
+    titles.set('system-information', systemInformationTitle);
     titles.set('network-information', networkInformationTitle);
     titles.set('docker', dockerTitle);
 
@@ -43,7 +43,7 @@ window.onload = () => {
             prevActive.setAttribute('class', prevActive.className
                 .replace('active', '')
                 .replace('hover', '')); // Get rid of the active and the hover classes.
-            if(sidebarReplace(prevActive.id) !== 'settings') { // If the button isn't settings
+            if (sidebarReplace(prevActive.id) !== 'settings') { // If the button isn't settings
                 document.getElementById(sidebarReplace(prevActive.id)).style.display = 'none'; // Hide its menu
             }
 
@@ -52,33 +52,13 @@ window.onload = () => {
             active = child.id;
 
             // Update main display
-            if(sidebarReplace(active) !== "settings") {
+            if (sidebarReplace(active) !== "settings") {
                 document.getElementById(sidebarReplace(active)).style.display = 'block'; // Show the menu.
                 document.title = titles.get(sidebarReplace(active)); // Set the new title.
             }
         }
     }
-
-    const myChart = new Chart(document.getElementById('overview-cpu').getContext('2d'), { // Create a new chart and provide it the 2D context of the chart object in HTML.
-        type: 'line',
-        data: {
-            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            datasets: [{
-                label: 'CPU',
-                data: [50, 40, 50, 45, 46, 47, 48, 49, 50, 51]
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
 }
-
 
 
 /**
@@ -91,9 +71,9 @@ function sidebarReplace(name) {
 }
 
 /**
-    Function to get seconds from milliseconds (* 1000)
-    @param time The time in seconds you want
-    @return The time converted to milliseconds.
+ Function to get seconds from milliseconds (* 1000)
+ @param time The time in seconds you want
+ @return The time converted to milliseconds.
  */
 function getSeconds(time) {
     return time * 1000

@@ -34,9 +34,19 @@
     <!-- Content div to show the main content and graphs of the page -->
     <div id="content">
         <div id="overview" class="content-section">
-            <canvas id="overview-cpu" style="width: 50%"></canvas><span>CPU Overview</span>
-            <canvas id="overview-gpu"></canvas><span>GPU Overview</span>
-            <canvas id="overview-ram"></canvas><span>RAM Overview</span>
+            <div style="display: flex; flex-direction: row;">
+                <div style="width: 50%; height: 300px">
+                    <canvas id="overview-cpu" style="width: 50%"></canvas><span>CPU Overview</span>
+                </div>
+                <div style="width: 50%; height: 300px">
+                    <canvas id="overview-gpu"></canvas><span>GPU Overview</span>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row;">
+                <div style="width: 50%; height: 300px;">
+                    <canvas id="overview-ram"></canvas><span>RAM Overview</span>
+                </div>
+            </div>
         </div>
         <div id="system-information" class="content-section">
             <p> System Information </p>
@@ -54,9 +64,9 @@
     </div>
 </div>
 <!-- You can also require other files to run in this process -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart JS wasn't working inside the preload so included it here.-->
 <script src="./renderer.js"></script>
 <script src="./js/index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart JS wasn't working inside the preload so included it here.
 
 </body>
 </html>
