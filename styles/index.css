@@ -83,7 +83,7 @@ body {
 
 .sidebar-sub-button {
     /* Set the way the button will be displayed.*/
-     display: block;
+    display: block;
     padding: 7px;
     /*Set the font changes*/
     font-size: 17px;
