@@ -2,14 +2,18 @@
  * Document for use to create the logic for the index page.
  */
 
-let cpuGraph = document.getElementById('overview-cpu');
-let gpuGraph = document.getElementById('overview-gpu');
-let ramGraph = document.getElementById('overview-ram');
-
+// Sets of the arrays for each graph, so that they can be modified in the interval.
 let cpuLabels = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
 let cpuData = Array.from({length: 10}, () => Math.floor(Math.random() * 101));
 
-let cpuCreateGraph = new Chart(cpuGraph, {
+let gpuLabels = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
+let gpuData = Array.from({length: 10}, () => Math.floor(Math.random() * 101));
+
+let ramLabels = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
+let ramData = Array.from({length: 10}, () => Math.floor(Math.random() * 101));
+
+// The graph objects so that they are created.
+let cpuCreateGraph = new Chart(document.getElementById('overview-cpu'), {
     type: 'line',
     data: {
         labels: cpuLabels,
@@ -31,13 +35,13 @@ let cpuCreateGraph = new Chart(cpuGraph, {
     }
 });
 
-let gpuCreateGraph = new Chart(gpuGraph, {
+let gpuCreateGraph = new Chart(document.getElementById('overview-gpu'), {
     type: 'line',
     data: {
-        labels: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+        labels: gpuLabels,
         datasets: [{
             label: 'GPU',
-            data: Array.from({length: 10}, () => Math.floor(Math.random() * 101)) // Create an array of 10 random numbers for now.
+            data: gpuData
         }]
     },
     options: {
@@ -53,13 +57,13 @@ let gpuCreateGraph = new Chart(gpuGraph, {
     }
 });
 
-let ramCreateGraph = new Chart(ramGraph, {
+let ramCreateGraph = new Chart(document.getElementById('overview-ram'), {
     type: 'line',
     data: {
-        labels: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+        labels: ramLabels,
         datasets: [{
             label: 'RAM',
-            data: Array.from({length: 10}, () => Math.floor(Math.random() * 101)) // Create an array of 10 random numbers for now.
+            data: ramData
         }]
     },
     options: {
@@ -74,6 +78,7 @@ let ramCreateGraph = new Chart(ramGraph, {
         }
     }
 });
+
 // Reload the graphs every 15 seconds.
 setInterval(function() {
 
