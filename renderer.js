@@ -30,17 +30,19 @@ window.onload = () => {
 // Apply a mouseover and mouseout function to all the items in the sidebar, so that they highlight. Change title on active.
     for (let child of document.getElementById('sidebar').children) { // For all the children in the sidebar.
         child.onmouseover = function () {
-            if (!child.className.includes('active') && Object.keys(extendedSidebarButtons).includes(child.id)) { // If there is not an active class applied and it belongs to the submenu buttons
+            if (!child.className.includes('active') && Object.keys(extendedSidebarButtons).includes(child.id)) { // If there is not an active class applied, and it belongs to the submenu buttons
                 child.setAttribute('class', `${child.className} hover`); // Add the hover effect.
             }
         };
         child.onmouseout = function () {
-            if (!child.className.includes('active') && Object.keys(extendedSidebarButtons).includes(child.id)) { // If there is not an active class applied and it belongs to the submenu buttons
+            if (!child.className.includes('active') && Object.keys(extendedSidebarButtons).includes(child.id)) { // If there is not an active class applied, and it belongs to the submenu buttons
                 child.setAttribute('class', child.className.replace('hover', '')) // Remove the hover class
             }
         };
         child.onclick = function () {
-
+            if (child.id === 'sidebar-settings-button') {
+                window.electron.send('load-settings'); // Load the settings window.
+            }
             if (Object.keys(sidebarButtons).includes(child.id)) { // Check that it belongs to the submenu buttons.
                 // Remove the active from the button.
                 let prevActive = document.getElementById(active)

@@ -28,13 +28,17 @@ function createStartupWindow () {
     mainWindow.loadFile("index.html"); // Load the file into the main window which was defined.
   });
 
-  ipcMain.on('load-settings-menu', () => {
-    let window = new BrowserWindow({
+  ipcMain.on('load-settings', () => {
+    let settingsWindow = new BrowserWindow({
+      parent: mainWindow, // Sets this so the window knows what to open from.
+      modal: true, // This makes the window a modal, so that you can't return to the parent without closing it first.
       width: 800,
       height: 600,
       resizable: false
-    })
-  })
+    });
+
+    settingsWindow.loadFile('settings.html');
+  });
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
