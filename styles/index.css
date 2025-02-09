@@ -82,16 +82,25 @@ body {
 }
 
 .sidebar-sub-button {
-    /* Set the way the button will be displayed.*/
-    display: block;
-    padding: 7px;
-    /*Set the font changes*/
+    display: none;
     font-size: 17px;
     font-weight: normal;
-    /* Align the text inside this button*/
+
     vertical-align: center;
     text-align: center;
 }
+
+/*.sidebar-sub-button {*/
+/*    !* Set the way the button will be displayed.*!*/
+/*    display: block;*/
+/*    padding: 7px;*/
+/*    !*Set the font changes*!*/
+/*    font-size: 17px;*/
+/*    font-weight: normal;*/
+/*    !* Align the text inside this button*!*/
+/*    vertical-align: center;*/
+/*    text-align: center;*/
+/*}*/
 
 /*Set to overview default show, as this is the default startup panel.*/
 #overview {
