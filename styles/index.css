@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+.subtitle {
+    color: rgb(200, 200, 200);
+}
+
 #sidebar {
     min-width: 220px;
     max-width: 300px;
@@ -16,6 +20,11 @@ body {
     position: relative; /* required to configure the settings div to be in the bottom left.*/
 
     user-select: none;
+}
+
+#sidebar a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 #sidebar-settings-button {
