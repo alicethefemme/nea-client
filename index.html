@@ -16,11 +16,47 @@
     <div id="sidebar-system-information-button" class="sidebar-button">
         <span class="material-icons">dns</span><span> System Information </span>
     </div>
+    <div id="sidebar-system-information-submenu" class="sidebar-sub-button">
+        <!-- Submenu buttons for System Information -->
+        <div id="sidebar-system-information-hardware-button">
+            <span> Hardware </span>
+        </div>
+        <div id="sidebar-system-information-processes-button">
+            <span> System Processes </span>
+        </div>
+    </div>
     <div id="sidebar-network-information-button" class="sidebar-button">
         <span class="material-icons">settings_ethernet</span><span> Network Information </span>
     </div>
+    <div id="sidebar-network-information-submenu" class="sidebar-sub-button">
+        <!-- Submenu buttons for Network Information -->
+        <div id="sidebar-network-information-network-button">
+            <span> Network I/O </span>
+        </div>
+        <div id="sidebar-network-information-port-button">
+            <span> Ports </span>
+        </div>
+    </div>
     <div id="sidebar-docker-button" class="sidebar-button">
         <span style="vertical-align: center"><img src="assets/docker.svg" width="24px" height="24px" alt="Docker icon"></span><span> Docker </span>
+    </div>
+    <div id="sidebar-docker-submenu" class="sidebar-sub-button">
+        <!-- Submenu buttons for Docker -->
+        <a href="#docker-images">
+            <div id="sidebar-docker-images-button">
+                <span> Images </span>
+            </div>
+        </a>
+        <a href="#docker-containers">
+            <div id="sidebar-docker-containers-button">
+                <span> Containers </span>
+            </div>
+        </a>
+        <a href="#docker-volumes">
+            <div id="sidebar-docker-volumes-button">
+                <span> Volumes </span>
+            </div>
+        </a>
     </div>
     <div id="sidebar-settings-button">
         <div style="display: block; text-align: center;">
@@ -55,12 +91,24 @@
             <p> Network Information </p>
         </div>
         <div id="docker" class="content-section">
-            <p> Docker </p>
+            <div id="docker-images" style="border-top: 1px solid white; border-bottom: 1px solid white;">
+                <h1> Images </h1>
+                <p class="subtitle"> Easily manage all of your installed images, update them and more from this section.</p>
+                <p> A list to go here for all the images, and utility functions if possible.</p>
+            </div>
+            <div id="docker-containers" style="border-top: 1px solid white; border-bottom: 1px solid white;">
+                <h1> Containers </h1>
+                <p> A list to go here for all containers, ability to stop and start them.</p>
+            </div>
+            <div id="docker-volumes" style="border-top: 1px solid white; border-bottom: 1px solid white;">
+                <h1> Volumes </h1>
+                <p> A list to go here for all the volumes, and utility functions if possible.</p>
+            </div>
         </div>
     </div>
     <!-- Info panel to show more information on the selected elements -->
     <div id="info-panel">
-        <p id="testtest"> This will be the right information panel!</p>
+        <p> This will be the right information panel!</p>
     </div>
 </div>
 <!-- You can also require other files to run in this process -->

@@ -4,8 +4,12 @@ body {
     margin: 0;
 }
 
+.subtitle {
+    color: rgb(200, 200, 200);
+}
+
 #sidebar {
-    min-width: 280px;
+    min-width: 220px;
     max-width: 300px;
     width: 15%;
     height: 100vh;
@@ -16,6 +20,11 @@ body {
     position: relative; /* required to configure the settings div to be in the bottom left.*/
 
     user-select: none;
+}
+
+#sidebar a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 #sidebar-settings-button {
@@ -49,6 +58,7 @@ body {
 
 #content {
     width: 100%;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
 }
@@ -68,6 +78,10 @@ body {
     background-color: rgb(71, 78, 104);
 }
 
+.hover div { /* Added a small fix to include this on elements where there is a surrounding a tag as well.*/
+    background-color: rgb(71, 78, 104);
+}
+
 .sidebar-button {
     /*Set the way the button will be displayed.*/
     display: block;
@@ -82,10 +96,20 @@ body {
     text-align: center;
 }
 
+.sidebar-sub-button {
+    display: none;
+    font-size: 17px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.sidebar-sub-button div {
+    padding: 5px;
+}
+
 /*Set to overview default show, as this is the default startup panel.*/
 #overview {
-    /*display: flex;*/
-    /*flex-direction: column;*/
+    display: block;
 }
 
 /*Automatically hide all sections of the content, so that only the one which is meant to be visible will be*/
