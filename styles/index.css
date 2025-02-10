@@ -77,6 +77,10 @@ body {
     background-color: rgb(71, 78, 104);
 }
 
+.hover div { /* Added a small fix to include this on elements where there is a surrounding a tag as well.*/
+    background-color: rgb(71, 78, 104);
+}
+
 .sidebar-button {
     /*Set the way the button will be displayed.*/
     display: block;

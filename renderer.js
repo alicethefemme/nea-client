@@ -42,7 +42,7 @@ window.onload = () => {
         };
         child.onmouseout = function () {
             if (!child.className.includes('active') && Object.keys(extendedSidebarButtons).includes(child.id)) { // If there is not an active class applied, and it belongs to the submenu buttons
-                child.setAttribute('class', child.className.replace('hover', '')) // Remove the hover class
+                child.setAttribute('class', child.className.replace(' hover', '')) // Remove the hover class
             }
         };
         child.onclick = function () {
@@ -53,7 +53,7 @@ window.onload = () => {
 
                 // Remove the active from the button.
                 let prevActive = document.getElementById(active);
-                prevActive.className = prevActive.className.replace('active', '').replace('hover', ''); // Remove the hover and active classes.
+                prevActive.className = prevActive.className.replace(' active', '').replace(' hover', ''); // Remove the hover and active classes.
                 document.getElementById(sidebarReplace(prevActive.id)).style.display = 'none'; // Hide the content connected to it.
 
                 // Get the submenu buttons for the previously active selection and hide them.
@@ -83,7 +83,7 @@ window.onload = () => {
                 child.className = `${child.className} hover`
             };
             child.onmouseout = function () {
-                child.className = child.className.replace('hover', '')
+                child.className = child.className.replace(' hover', '')
             };
         }
     }
