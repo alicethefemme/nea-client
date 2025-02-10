@@ -15,14 +15,15 @@ window.onload = () => {
     const networkInformationTitle = `${title} - Network Information`
     const dockerTitle = `${title} - Docker`
 
-    const titles = new Map();
-    titles.set('overview', overviewTitle);
-    titles.set('system-information', systemInformationTitle);
-    titles.set('network-information', networkInformationTitle);
-    titles.set('docker', dockerTitle);
+    const titles = {
+        'overview': overviewTitle,
+        'system-information': systemInformationTitle,
+        'network-information': networkInformationTitle,
+        'docker': dockerTitle
+    }
 
     let active = 'sidebar-overview-button';
-    document.title = titles.get(sidebarReplace(active));
+    document.title = titles[sidebarReplace(active)];
 
     const sidebarButtons = {
         'sidebar-overview-button': null,
@@ -68,7 +69,7 @@ window.onload = () => {
 
                 // Update main display
                 document.getElementById(sidebarReplace(active)).style.display = 'block'; // Show the menu.
-                document.title = titles.get(sidebarReplace(active)); // Set the new title.
+                document.title = titles[sidebarReplace(active)]; // Set the new title.
 
                 // Show the new submenu buttons.
                 if (sidebarButtons[active] !== null) {
