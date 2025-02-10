@@ -85,9 +85,11 @@ body {
     display: none;
     font-size: 17px;
     font-weight: normal;
-
-    vertical-align: center;
     text-align: center;
+}
+
+.sidebar-sub-button div {
+    padding: 5px;
 }
 
 /*.sidebar-sub-button {*/
