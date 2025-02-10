@@ -58,8 +58,9 @@ body {
 
 #content {
     width: 100%;
-    display: grid;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
 }
 
 #info-panel {
@@ -105,18 +106,6 @@ body {
 .sidebar-sub-button div {
     padding: 5px;
 }
-
-/*.sidebar-sub-button {*/
-/*    !* Set the way the button will be displayed.*!*/
-/*    display: block;*/
-/*    padding: 7px;*/
-/*    !*Set the font changes*!*/
-/*    font-size: 17px;*/
-/*    font-weight: normal;*/
-/*    !* Align the text inside this button*!*/
-/*    vertical-align: center;*/
-/*    text-align: center;*/
-/*}*/
 
 /*Set to overview default show, as this is the default startup panel.*/
 #overview {

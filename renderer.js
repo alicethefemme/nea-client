@@ -88,25 +88,6 @@ window.onload = () => {
         }
     }
 
-
-    const myChart = new Chart(document.getElementById('overview-cpu').getContext('2d'), { // Create a new chart and provide it the 2D context of the chart object in HTML.
-        type: 'line',
-        data: {
-            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            datasets: [{
-                label: 'CPU',
-                data: [50, 40, 50, 45, 46, 47, 48, 49, 50, 51]
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
 }
 
 
@@ -117,13 +98,4 @@ window.onload = () => {
  */
 function sidebarReplace(name) {
     return name.replace('sidebar-', '').replace('-button', '')
-}
-
-/**
- Function to get seconds from milliseconds (* 1000)
- @param time The time in seconds you want
- @return The time converted to milliseconds.
- */
-function getSeconds(time) {
-    return time * 1000
 }
