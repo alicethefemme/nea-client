@@ -71,6 +71,7 @@ window.onload = () => {
                 }
                 // Update main display
                 document.title = titles[sidebarReplace(active)]; // Set the new title.
+                document.getElementById(sidebarReplace(active)).style.display = 'block'; // Show the main content
             }
         }
     }

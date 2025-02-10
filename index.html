@@ -42,9 +42,15 @@
     </div>
     <div id="sidebar-docker-submenu" class="sidebar-sub-button">
         <!-- Submenu buttons for Docker -->
-        <span> Images </span>
-        <span> Containers </span>
-        <span> Volumes </span>
+        <div id="sidebar-docker-images-button">
+            <span> Images </span>
+        </div>
+        <div id="sidebar-docker-containers-button">
+            <span> Containers </span>
+        </div>
+        <div id="sidebar-docker-volumes-button">
+            <span> Volumes </span>
+        </div>
     </div>
     <div id="sidebar-settings-button">
         <div style="display: block; text-align: center;">
@@ -70,11 +76,14 @@
         </div>
         <div id="docker" class="content-section">
             <p> Docker </p>
+            <h1 id="docker-images"> Images </h1>
+            <h1 id="docker-containers"> Containers </h1>
+            <h1 id="docker-volumes"> Volumes </h1>
         </div>
     </div>
     <!-- Info panel to show more information on the selected elements -->
     <div id="info-panel">
-        <p id="testtest"> This will be the right information panel!</p>
+        <p> This will be the right information panel!</p>
     </div>
 </div>
 <!-- You can also require other files to run in this process -->
