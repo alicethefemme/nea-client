@@ -30,14 +30,33 @@ function createStartupWindow () {
 
   ipcMain.on('load-settings', () => {
     let settingsWindow = new BrowserWindow({
-      parent: mainWindow, // Sets this so the window knows what to open from.
-      modal: true, // This makes the window a modal, so that you can't return to the parent without closing it first.
       width: 800,
       height: 600,
-      resizable: false
+      resizable: false,
+      parent: mainWindow, // Sets this so the window knows what to open from.
+      modal: false, // This makes the window a modal, so that you can't return to the parent without closing it first.
+      show: false,
+      frame: true
     });
 
     settingsWindow.loadFile('settings.html');
+
+    settingsWindow.once('ready-to-show', () => {
+      settingsWindow.show();
+
+      settingsWindow.focus();
+
+      settingsWindow.setAlwaysOnTop(true);
+
+      mainWindow.setFocusable(false);
+      mainWindow.setIgnoreMouseEvents(true);
+    });
+
+    settingsWindow.once('close', () => {
+      mainWindow.setFocusable(true);
+      mainWindow.setIgnoreMouseEvents(false);
+    })
+  //   TODO: Add a local datastore for settings.
   });
 
   // Open the DevTools.

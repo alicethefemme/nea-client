@@ -10,14 +10,39 @@ Main color: rgb(107, 114, 142)
 Text: rgb(255, 255, 255)
  */
 
-body {
-    /* Set the colours to match the theming */
-    background-color: rgb(64, 66, 88);
-    color: rgb(255, 255, 255);
+:root {
+    --main-dark-background: #121212;
+    --secondary-dark-background: #1b1522;
+    --dark-font-color: #fff;
 
+    --main-light-background: #ededed;
+    --secondary-light-background: #e0d8eb;
+    --light-font-color: #000;
+
+    --primary-theme: #5124cc;
+    --secondary-theme: #6b3ed3;
+}
+
+
+body {
     /* Set the font family and size to be easily readable.*/
     font-family: helvetica, sans-serif;
 }
+
+@media(prefers-color-scheme: dark) {
+    body {
+        background-color: var(--main-dark-background);
+        color: var(--dark-font-color);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: var(--main-light-background);
+        color: var(--light-font-color);
+    }
+}
+
 
 button, select {
     background-color: rgb(80, 87, 122);
