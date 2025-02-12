@@ -22,12 +22,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 contextBridge.exposeInMainWorld('electron', {
   send: (channel, data) => {
-    console.log(channel);
     const validChannels = ['load-main', 'load-settings'];
-    console.log(`Channel ${channel} has been called.`)
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data)
     }
   },
-  receive: (channel, callback) => ipcRenderer.on(channel, callback)
+  receive: (channel, callback) => {
+    ipcRenderer.on(channel, callback)
+  }
 });

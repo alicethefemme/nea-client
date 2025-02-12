@@ -100,6 +100,8 @@ setInterval(function() {
 
 }, getMilliseconds(1)) // Time out is in milliseconds.
 
+app.electron.send('get-data', 'settings.json')
+
 /**
  * A function to return the milliseconds from seconds.
  * @param time The seconds you want to transform
