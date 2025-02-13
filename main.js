@@ -79,10 +79,17 @@ function createStartupWindow() {
 
     ipcMain.on('load-settings', () => {
         let settingsWindow = new BrowserWindow({
-            parent: mainWindow, modal: true, width: 800, height: 600, resizable: false
+            parent: mainWindow, modal: true, width: 800, height: 600, resizable: false, webPreferences: {
+                preload: path.join(__dirname, './js/settingsWindowPreload.js'), contextIsolation: true
+            }
         });
 
         settingsWindow.loadFile('settings.html');
+
+        ipcMain.on('close-settings', function () {
+            settingsWindow.close();
+            settingsWindow.destroy();
+        })
     });
 
     // Open the DevTools.
