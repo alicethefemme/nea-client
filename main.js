@@ -38,9 +38,11 @@ function getSettings() {
     const appData = app.getPath('userData');
 
     const settingFile = path.join(appData, 'settings.json');
+    console.log(settingFile);
     let settings = new Settings();
 
     fs.readFile(settingFile, 'utf-8', (err, data) => {
+        console.log(JSON.stringify(settings.getValues()));
         if (err) {
             fs.writeFile(settingFile, JSON.stringify(settings.getValues()), (err) => {
                 console.error(err)
@@ -48,8 +50,8 @@ function getSettings() {
             console.log('Generated default values for file which does not exist.')
         }
         const fileData = JSON.parse(data);
-
         // Check if the settings are valid and if not set the file to the default valid settings.
+
         if (!checkValiditySettings(fileData)) {
             fs.writeFile(settingFile, JSON.stringify(settings.getValues()), (err) => {
                 console.error(err)
@@ -57,6 +59,7 @@ function getSettings() {
             console.log('Generated default values for file which does not have correct or valid values');
         }
 
+        console.log(fileData);
         return fileData;
 
     })
@@ -78,12 +81,12 @@ function createStartupWindow() {
     });
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
 }
 
 function createSettingsWindow() {
     // Check that there is not an existing window first.
-    if(settingsWindow && !settingsWindow.isDestroyed()) {
+    if (settingsWindow && !settingsWindow.isDestroyed()) {
         return;
     }
 
@@ -92,6 +95,7 @@ function createSettingsWindow() {
         modal: true,
         width: 800,
         height: 600,
+        show: false,
         resizable: false,
         titleBarStyle: 'hidden',
         webPreferences: {
@@ -101,14 +105,19 @@ function createSettingsWindow() {
 
     settingsWindow.loadFile('settings.html');
 
+    settingsWindow.webContents.openDevTools();
+
+    // To avoid white flickering, show the window only when HTML has been loaded.
+    settingsWindow.on('ready-to-show', () => {
+        settingsWindow.show();
+    })
+
     // Close the window if instances do exist, else nothing happens.
     settingsWindow.on('closed', () => {
-        if(settingsWindow && !settingsWindow.isDestroyed()) {
+        if (settingsWindow && !settingsWindow.isDestroyed()) {
             settingsWindow = null;
         }
     });
-
-
 }
 
 
@@ -131,12 +140,12 @@ ipcMain.on('load:settings', () => {
 
 // Close calls
 ipcMain.on('close:settings', () => {
-    if(settingsWindow && !settingsWindow.isDestroyed()) {
+    if (settingsWindow && !settingsWindow.isDestroyed()) {
         settingsWindow.close();
     }
 })
 
-ipcMain.handle('get-data', (dataType) => {
+ipcMain.handle('get:data', (dataType) => {
     switch (dataType) {
         case 'settings':
             return getSettings();

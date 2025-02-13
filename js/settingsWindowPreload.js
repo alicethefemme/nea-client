@@ -13,7 +13,7 @@ contextBridge.exposeInMainWorld('electron', {
         }
     },
     receive: (channel, callback) => {
-        const validChannels = ['get-data'];
+        const validChannels = ['get:data'];
 
         if (validChannels.includes(channel)) {
             ipcRenderer.on(channel, callback);
