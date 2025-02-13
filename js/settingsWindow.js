@@ -9,10 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 document.addEventListener('keyup', (key) => {
-    try {
-        window.electron.send('close-settings');
-
-    } catch (e) {
-        console.error(e);
+    if (key.key === 'Escape') {
+        window.electron.send('close:settings');
     }
 })

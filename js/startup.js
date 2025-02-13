@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() { // Wait for the docum
         if (val === "") { // If the value hasn't been set.
             alert("Please select a valid server!");
         } else {
-            window.electron.send('load-main'); // Send the message to the IPC to load the main window.
+            window.electron.send('load:main'); // Send the message to the IPC to load the main window.
         }
     }
 })

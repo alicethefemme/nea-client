@@ -4,6 +4,10 @@ const path = require('node:path')
 const fs = require('node:fs')
 const {Settings} = require('./js/classes/settings')
 
+// Define windows here so we can use them between functions.
+let mainWindow;
+let settingsWindow = null;
+
 /**
  * Checks if the settings file has all the right headers.
  * @param settingData Array The JSON parsed contents of the file.
@@ -60,7 +64,7 @@ function getSettings() {
 }
 
 function createStartupWindow() {
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 800, height: 600, resizable: false, webPreferences: {
             preload: path.join(__dirname, 'preload.js'), contextIsolation: true
         }
@@ -68,33 +72,69 @@ function createStartupWindow() {
 
     mainWindow.loadFile('startup.html')
 
-    // Load the main application window
-    ipcMain.on('load-main', () => {
-        mainWindow.setMinimumSize(1280, 720);
-        mainWindow.setSize(1280, 720);
-        mainWindow.resizable = true;
-
-        mainWindow.loadFile("index.html");
-    });
-
-    ipcMain.on('load-settings', () => {
-        let settingsWindow = new BrowserWindow({
-            parent: mainWindow, modal: true, width: 800, height: 600, resizable: false, webPreferences: {
-                preload: path.join(__dirname, './js/settingsWindowPreload.js'), contextIsolation: true
-            }
-        });
-
-        settingsWindow.loadFile('settings.html');
-
-        ipcMain.on('close-settings', function () {
-            settingsWindow.close();
-            settingsWindow.destroy();
-        })
+    // Remove any references to the window provided that it is closed.
+    mainWindow.on('closed', () => {
+        mainWindow = null;
     });
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 }
+
+function createSettingsWindow() {
+    // Check that there is not an existing window first.
+    if(settingsWindow && !settingsWindow.isDestroyed()) {
+        return;
+    }
+
+    settingsWindow = new BrowserWindow({
+        parent: mainWindow,
+        modal: true,
+        width: 800,
+        height: 600,
+        resizable: false,
+        titleBarStyle: 'hidden',
+        webPreferences: {
+            preload: path.join(__dirname, './js/settingsWindowPreload.js'), contextIsolation: true
+        }
+    });
+
+    settingsWindow.loadFile('settings.html');
+
+    // Close the window if instances do exist, else nothing happens.
+    settingsWindow.on('closed', () => {
+        if(settingsWindow && !settingsWindow.isDestroyed()) {
+            settingsWindow = null;
+        }
+    });
+
+
+}
+
+
+/**
+ * FUNCTIONS FOR IPCMAIN
+ */
+
+// Load calls
+ipcMain.on('load:main', () => {
+    mainWindow.setMinimumSize(1280, 720);
+    mainWindow.setSize(1280, 720);
+    mainWindow.resizable = true;
+
+    mainWindow.loadFile("index.html");
+});
+
+ipcMain.on('load:settings', () => {
+    createSettingsWindow();
+});
+
+// Close calls
+ipcMain.on('close:settings', () => {
+    if(settingsWindow && !settingsWindow.isDestroyed()) {
+        settingsWindow.close();
+    }
+})
 
 ipcMain.handle('get-data', (dataType) => {
     switch (dataType) {
