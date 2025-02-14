@@ -1,11 +1,12 @@
 
 let testParagraph = document.getElementById('test');
 
-document.addEventListener('DOMContentLoaded', async () => {
-    let settings = await window.electron.invoke('get:data', 'settings');
+document.addEventListener('DOMContentLoaded', () => {
+    window.electron.invoke('get:data', 'settings').then((settings) => {
+        testParagraph.innerText = settings['reloadTime'] // Ensure that you get settings with their given string title.
+    })
+    // console.log(JSON.parse(settings));
 
-    testParagraph.innerText = settings;
-    // testParagraph.innerText = Object.keys(JSON.stringify(settings));
 });
 
 document.addEventListener('keyup', (key) => {

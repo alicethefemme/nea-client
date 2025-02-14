@@ -141,9 +141,7 @@ ipcMain.on('close:settings', () => {
 ipcMain.handle('get:data', (event, dataType) => {
     switch (dataType) {
         case 'settings': {
-            let returnVal = getSettings();
-            console.log(`${returnVal} at HANDLE`);
-            return returnVal
+            return getSettings();
         }
     }
 });
