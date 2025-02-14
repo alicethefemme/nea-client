@@ -38,28 +38,29 @@ function getSettings() {
     const appData = app.getPath('userData');
 
     const settingFile = path.join(appData, 'settings.json');
-    console.log(settingFile);
     let settings = new Settings();
 
     fs.readFile(settingFile, 'utf-8', (err, data) => {
-        console.log(JSON.stringify(settings.getValues()));
+        let fileData;
+
         if (err) {
-            fs.writeFile(settingFile, JSON.stringify(settings.getValues()), (err) => {
+            fileData = JSON.stringify(settings.getValues());
+            fs.writeFile(settingFile, fileData, (err) => {
                 console.error(err)
             });
             console.log('Generated default values for file which does not exist.')
-        }
-        const fileData = JSON.parse(data);
-        // Check if the settings are valid and if not set the file to the default valid settings.
+        } else {
+            fileData = JSON.parse(data);
+            // Check if the settings are valid and if not set the file to the default valid settings.
 
-        if (!checkValiditySettings(fileData)) {
-            fs.writeFile(settingFile, JSON.stringify(settings.getValues()), (err) => {
-                console.error(err)
-            });
-            console.log('Generated default values for file which does not have correct or valid values');
+            if (!checkValiditySettings(fileData)) {
+                fs.writeFile(settingFile, JSON.stringify(settings.getValues()), (err) => {
+                    console.error(err)
+                });
+                console.log('Generated default values for file which does not have correct or valid values');
+            }
         }
 
-        console.log(fileData);
         return fileData;
 
     })
@@ -145,7 +146,7 @@ ipcMain.on('close:settings', () => {
     }
 })
 
-ipcMain.handle('get:data', (dataType) => {
+ipcMain.handle('get:data', (event, dataType) => {
     switch (dataType) {
         case 'settings':
             return getSettings();

@@ -1,9 +1,8 @@
 const {contextBridge, ipcRenderer} = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
-    invoke: (channel, data) => {
-        console.log(`${channel}, ${data}`);
-        ipcRenderer.invoke(channel, data);
+    invoke: async(channel, data) => {
+        return ipcRenderer.invoke(channel, data);
     },
     send: (channel, data) => {
         const validChannels = ['close:settings'];
