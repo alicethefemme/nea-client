@@ -37,40 +37,11 @@ function checkSettingsHeadersForValid(settingData) {
  */
 function getSettings()  {
     const appData = app.getPath('userData');
-
     const settingFile = path.join(appData, 'settings.json');
-    console.log(`${settingFile}`)
-    let settings = new Settings();
 
+    let settings = new Settings();
     let fileData;
-    // fs.readFile(settingFile, 'utf-8', (err, data) => {
-    //     if (err) {
-    //         console.error(err);
-    //         fileData = JSON.stringify(settings.getValues());
-    //         // fs.writeFile(settingFile, fileData, (err) => {
-    //         //     console.error(err);
-    //         // });
-    //         fs.writeFileSync(settingFile, fileData);
-    //         console.log('Generated default values for file which does not exist.')
-    //         return fileData;
-    //     } else {
-    //         console.log('Success')
-    //         fileData = JSON.parse(JSON.stringify(data));
-    //
-    //         // Check if the settings are valid and if not set the file to the default valid settings.
-    //         if (checkValiditySettings(fileData)) {
-    //             console.log(' Invalid file')
-    //             fs.writeFile(settingFile, JSON.stringify(settings.getValues()), (err) => {
-    //                 if(err) console.error(err);
-    //             });
-    //             fileData = JSON.parse(JSON.stringify(settings.getValues()));
-    //             console.log('Generated default values for file which does not have correct or valid values');
-    //             console.log(fileData);
-    //             return fileData;
-    //         }
-    //
-    //         return fileData;
-    //     }
+
     if(fs.existsSync(settingFile)) {
         fileData = fs.readFileSync(settingFile, {encoding: 'utf8'});
         if(!checkSettingsHeadersForValid(JSON.parse(fileData))) {
