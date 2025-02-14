@@ -13,21 +13,21 @@ let settingsWindow = null;
  * @param settingData Array The JSON parsed contents of the file.
  * @returns {boolean} The validity of this content
  */
-function checkValiditySettings(settingData) {
+function checkSettingsHeadersForValid(settingData) {
     let settingsInfo = {
         'reloadTime': Number, 'customLogPath': String
     }
 
     for (let header of Object.keys(settingsInfo)) {
         if (!Object.keys(settingData).includes(header)) {
-            return true;
+            return false;
         }
         if (settingData[header].type === settingsInfo[header]) {
-            return true;
+            return false;
         }
     }
 
-    return false;
+    return true;
 }
 
 
@@ -43,34 +43,49 @@ function getSettings()  {
     let settings = new Settings();
 
     let fileData;
-    fs.readFile(settingFile, 'utf-8', (err, data) => {
-        if (err) {
-            console.error(err);
-            fileData = JSON.stringify(settings.getValues());
-            fs.writeFile(settingFile, fileData, (err) => {
-                console.error(err);
-            });
-            console.log('Generated default values for file which does not exist.')
-            return fileData;
+    // fs.readFile(settingFile, 'utf-8', (err, data) => {
+    //     if (err) {
+    //         console.error(err);
+    //         fileData = JSON.stringify(settings.getValues());
+    //         // fs.writeFile(settingFile, fileData, (err) => {
+    //         //     console.error(err);
+    //         // });
+    //         fs.writeFileSync(settingFile, fileData);
+    //         console.log('Generated default values for file which does not exist.')
+    //         return fileData;
+    //     } else {
+    //         console.log('Success')
+    //         fileData = JSON.parse(JSON.stringify(data));
+    //
+    //         // Check if the settings are valid and if not set the file to the default valid settings.
+    //         if (checkValiditySettings(fileData)) {
+    //             console.log(' Invalid file')
+    //             fs.writeFile(settingFile, JSON.stringify(settings.getValues()), (err) => {
+    //                 if(err) console.error(err);
+    //             });
+    //             fileData = JSON.parse(JSON.stringify(settings.getValues()));
+    //             console.log('Generated default values for file which does not have correct or valid values');
+    //             console.log(fileData);
+    //             return fileData;
+    //         }
+    //
+    //         return fileData;
+    //     }
+    if(fs.existsSync(settingFile)) {
+        fileData = fs.readFileSync(settingFile, {encoding: 'utf8'});
+        if(!checkSettingsHeadersForValid(JSON.parse(fileData))) {
+            console.log('Setting file not valid. Replacing file.');
+            fs.writeFileSync(settingFile, JSON.stringify(settings.getValues(), null, 4), {encoding: 'utf8'});
+            return JSON.parse(JSON.stringify(settings.getValues()));
         } else {
-            console.log('Success')
-            fileData = JSON.parse(JSON.stringify(data));
-
-            // Check if the settings are valid and if not set the file to the default valid settings.
-            if (checkValiditySettings(fileData)) {
-                console.log(' Invalid file')
-                fs.writeFile(settingFile, JSON.stringify(settings.getValues()), (err) => {
-                    if(err) console.error(err);
-                });
-                fileData = JSON.parse(JSON.stringify(settings.getValues()));
-                console.log('Generated default values for file which does not have correct or valid values');
-                console.log(fileData);
-                return fileData;
-            }
-
-            return fileData;
+            console.log('Setting file is valid. Returning settings.')
+            return JSON.parse(fileData);
         }
-    });
+    } else {
+        console.log('Setting file nonexistent. Creating file.');
+        fs.writeFileSync(settingFile, JSON.stringify(settings.getValues(), null, 4), {encoding: 'utf8'});
+        return JSON.parse(JSON.stringify(settings.getValues()));
+    }
 }
 
 function createStartupWindow() {
