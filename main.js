@@ -20,51 +20,57 @@ function checkValiditySettings(settingData) {
 
     for (let header of Object.keys(settingsInfo)) {
         if (!Object.keys(settingData).includes(header)) {
-            return false;
+            return true;
         }
         if (settingData[header].type === settingsInfo[header]) {
-            return false;
+            return true;
         }
     }
 
-    return true;
+    return false;
 }
 
 
 /**
  * Gets the setting file from the user folder and reads the contents.
+ * @returns Array The JSON array.
  */
-function getSettings() {
+function getSettings()  {
     const appData = app.getPath('userData');
 
     const settingFile = path.join(appData, 'settings.json');
+    console.log(`${settingFile}`)
     let settings = new Settings();
 
+    let fileData;
     fs.readFile(settingFile, 'utf-8', (err, data) => {
-        let fileData;
-
         if (err) {
+            console.error(err);
             fileData = JSON.stringify(settings.getValues());
             fs.writeFile(settingFile, fileData, (err) => {
-                console.error(err)
+                console.error(err);
             });
             console.log('Generated default values for file which does not exist.')
+            return fileData;
         } else {
-            fileData = JSON.parse(data);
+            console.log('Success')
+            fileData = JSON.parse(JSON.stringify(data));
+
             // Check if the settings are valid and if not set the file to the default valid settings.
-
-            if (!checkValiditySettings(fileData)) {
+            if (checkValiditySettings(fileData)) {
+                console.log(' Invalid file')
                 fs.writeFile(settingFile, JSON.stringify(settings.getValues()), (err) => {
-                    console.error(err)
+                    if(err) console.error(err);
                 });
+                fileData = JSON.parse(JSON.stringify(settings.getValues()));
                 console.log('Generated default values for file which does not have correct or valid values');
+                console.log(fileData);
+                return fileData;
             }
+
+            return fileData;
         }
-
-        return fileData;
-
-    })
-
+    });
 }
 
 function createStartupWindow() {
@@ -148,8 +154,11 @@ ipcMain.on('close:settings', () => {
 
 ipcMain.handle('get:data', (event, dataType) => {
     switch (dataType) {
-        case 'settings':
-            return getSettings();
+        case 'settings': {
+            let returnVal = getSettings();
+            console.log(`${returnVal} at HANDLE`);
+            return returnVal
+        }
     }
 });
 

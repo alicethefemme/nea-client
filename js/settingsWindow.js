@@ -3,7 +3,6 @@ let testParagraph = document.getElementById('test');
 
 document.addEventListener('DOMContentLoaded', async () => {
     let settings = await window.electron.invoke('get:data', 'settings');
-    console.log(`Settings: ${JSON.stringify(settings)}`);
 
     testParagraph.innerText = settings;
     // testParagraph.innerText = Object.keys(JSON.stringify(settings));
