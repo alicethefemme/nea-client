@@ -12,6 +12,8 @@ let gpuData = Array.from({length: 10}, () => Math.floor(Math.random() * 101));
 let ramLabels = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
 let ramData = Array.from({length: 10}, () => Math.floor(Math.random() * 101));
 
+let graphReloadTime = 15
+
 // The graph objects so that they are created.
 let cpuCreateGraph = new Chart(document.getElementById('overview-cpu'), {
     type: 'line',
@@ -81,26 +83,35 @@ let ramCreateGraph = new Chart(document.getElementById('overview-ram'), {
 
 // Reload the graphs.
 window.electron.invoke('get:data', 'settings').then((settings) => {
-    setInterval(function() {
+    graphReloadTime = settings.reloadTime
+    let reloadGraphs = setInterval(reloadGraphHandler, getMilliseconds(graphReloadTime)); // Time out is in milliseconds.
 
-        let num = Math.floor(Math.random() * 101);
+    window.electron.settingsUpdate((settings) => {
+        clearInterval(reloadGraphs);
 
-        // Data could be added like this, however I chose to use variables, as this is easier to manage.
-        // cpuCreateGraph.data.labels.push(`${num}`);
-        // cpuCreateGraph.data.datasets[0].data.push(num);
+        graphReloadTime = settings.reloadTime;
 
-        cpuLabels.push(num.toString())
-        cpuData.push(num)
-        cpuCreateGraph.update();
-
-        // Delete the old data.
-        cpuLabels.shift();
-        cpuData.shift();
-
-        cpuCreateGraph.update(); // Command used to update the graph, after affecting the data in it.
-
-    }, getMilliseconds(settings.reloadTime)) // Time out is in milliseconds.
+        reloadGraphs = setInterval(reloadGraphHandler, getMilliseconds(graphReloadTime));
+    })
 })
+
+function reloadGraphHandler() {
+    let num = Math.floor(Math.random() * 101);
+
+    // Data could be added like this, however I chose to use variables, as this is easier to manage.
+    // cpuCreateGraph.data.labels.push(`${num}`);
+    // cpuCreateGraph.data.datasets[0].data.push(num);
+
+    cpuLabels.push(num.toString())
+    cpuData.push(num)
+    cpuCreateGraph.update();
+
+    // Delete the old data.
+    cpuLabels.shift();
+    cpuData.shift();
+
+    cpuCreateGraph.update(); // Command used to update the graph, after affecting the data in it.
+}
 
 /**
  * A function to return the milliseconds from seconds.
