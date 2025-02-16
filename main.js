@@ -141,7 +141,7 @@ ipcMain.on('close:settings', () => {
 ipcMain.handle('get:data', (event, dataType) => {
     switch (dataType) {
         case 'settings': {
-            return getSettings();
+            return new Settings().fillFromJson(getSettings())
         }
     }
 });

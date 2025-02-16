@@ -27,7 +27,7 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.send(channel, data)
     }
   },
-  receive: (channel, callback) => {
-    ipcRenderer.on(channel, callback)
+  invoke: (channel, data) => {
+    return ipcRenderer.invoke(channel, data);
   }
 });

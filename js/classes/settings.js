@@ -7,11 +7,20 @@ class Settings {
         }, options)
     }
 
+
+
     getValues() {
         return {
             reloadTime: this.reloadTime,
             customLogPath: this.customLogPath
         };
+    }
+
+    fillFromJson(json) {
+        this.reloadTime = parseInt(json['reloadTime']);
+        this.customLogPath = json['customLogPath'];
+
+        return this;
     }
 }
 
