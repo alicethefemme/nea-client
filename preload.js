@@ -7,27 +7,36 @@
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
 
-const { contextBridge, ipcRenderer } = require('electron');
+const {contextBridge, ipcRenderer} = require('electron');
 
 window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector, text) => {
-    const element = document.getElementById(selector)
-    if (element) element.innerText = text
-  }
+    const replaceText = (selector, text) => {
+        const element = document.getElementById(selector)
+        if (element) element.innerText = text
+    }
 
-  for (const type of ['chrome', 'node', 'electron']) {
-    replaceText(`${type}-version`, process.versions[type])
-  }
+    for (const type of ['chrome', 'node', 'electron']) {
+        replaceText(`${type}-version`, process.versions[type])
+    }
 });
 
 contextBridge.exposeInMainWorld('electron', {
-  send: (channel, data) => {
-    const validChannels = ['load:main', 'load:settings'];
-    if (validChannels.includes(channel)) {
-      ipcRenderer.send(channel, data)
+    send: (channel, data) => {
+        const validChannels = ['load:main', 'load:settings'];
+        if (validChannels.includes(channel)) {
+            ipcRenderer.send(channel, data)
+        }
+    },
+    invoke: (channel, data) => {
+        const validChannels = {'get:data': ['settings', 'accounts']};
+        console.log(channel, data);
+        if (Object.keys(validChannels).includes(channel)) {
+            return ipcRenderer.invoke(channel, data);
+        }
+    },
+    settingsUpdate: (callback) => {
+        ipcRenderer.on('update:settings', (value) => {
+            callback(value)
+        })
     }
-  },
-  invoke: (channel, data) => {
-    return ipcRenderer.invoke(channel, data);
-  }
 });

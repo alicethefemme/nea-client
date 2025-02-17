@@ -17,12 +17,16 @@ document.addEventListener('DOMContentLoaded', function() { // Wait for the docum
 
     // Get the select box, and add 10 servers to it.
     const serverSelect = document.getElementById("server")
-    for (let i = 0; i < 10; i++) {
-        let opt = document.createElement("option"); // Create a new option element.
-        opt.value = (i + 1).toString(); // Set the value to the string of the number + 1.
-        opt.innerHTML = "Server " + (i + 1); // Set the visible text inside the HTML brackets.
-        serverSelect.appendChild(opt) // Add the new option to the select menu.
-    }
+    window.electron.invoke('get:data', 'accounts').then((accounts) => {
+        console.log(accounts.accounts);
+        for (let account of accounts.accounts) {
+            let opt = document.createElement("option");
+            opt.value = account.name;
+            opt.innerHTML = account.name;
+            serverSelect.appendChild(opt);
+        }
+    });
+
 
     /*
     Function to open up the "Add Server" modal.

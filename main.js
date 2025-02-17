@@ -1,8 +1,9 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require('node:path')
 const fs = require('node:fs')
 const {Settings} = require('./js/classes/settings')
+const {Accounts, Account} = require('./js/classes/account')
 
 // Define windows here so we can use them between functions.
 let mainWindow;
@@ -10,7 +11,7 @@ let settingsWindow = null;
 
 /**
  * Checks if the settings file has all the right headers.
- * @param settingData Array The JSON parsed contents of the file.
+ * @param settingData {Object} The JSON parsed contents of the file.
  * @returns {boolean} The validity of this content
  */
 function checkSettingsHeadersForValid(settingData) {
@@ -22,7 +23,37 @@ function checkSettingsHeadersForValid(settingData) {
         if (!Object.keys(settingData).includes(header)) {
             return false;
         }
-        if (settingData[header].type === settingsInfo[header]) {
+        if (settingData[header].type !== settingsInfo[header]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Check an individual account for validity.
+ * @param accountData {Object} The parsed JSON data with account.
+ * @returns {boolean} The result of if the account is valid or not.
+ */
+function checkAccountForValid(accountData) {
+    for(let header of Object.keys(accountData)) {
+        if(!['name', 'ipAddr', 'username', 'password'].includes(header)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Checks the account data for all the right headers.
+ * @param accountData {Object} The parsed JSON data from the file.
+ * @returns {boolean} The result of if the file is valid or not.
+ */
+function checkAccountsForValid(accountData) {
+    for(let account of accountData) {
+        if(!checkAccountForValid(account)) {
             return false;
         }
     }
@@ -33,7 +64,7 @@ function checkSettingsHeadersForValid(settingData) {
 
 /**
  * Gets the setting file from the user folder and reads the contents.
- * @returns Array The JSON array.
+ * @returns {Object} The JSON array.
  */
 function getSettings()  {
     const appData = app.getPath('userData');
@@ -59,6 +90,51 @@ function getSettings()  {
     }
 }
 
+/**
+ * Get the accounts from the local datastore.
+ * @returns {Accounts} The Account object containing all the accounts.
+ */
+function getAccounts() {
+    const appData = app.getPath('userData');
+    const accountFile = path.join(appData, 'accounts.json');
+
+    let fileData;
+
+    if(fs.existsSync(accountFile)) {
+        fileData = fs.readFileSync(accountFile, {encoding: 'utf8'});
+        if(!checkAccountsForValid(JSON.parse(fileData))) {
+            console.log('Account file invalid. Checking for valid accounts');
+
+            // Check for valid accounts
+            let validAccounts = [];
+            for(let account of JSON.parse(fileData)) {
+                if(checkAccountForValid(account)) {
+                    validAccounts.concat(new Account(account['name'], account['ipAddr'], account['username'], account['password']));
+                }
+            }
+            let accounts = new Accounts(validAccounts);
+
+            dialog.showErrorBox('Account file invalid', 'The account file is invalid!' +
+                `The following accounts are valid: ${accounts.getAccountNames()}. The app will proceed to load these into a new file.` );
+
+            fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts), {encoding: 'utf8'});
+            return accounts
+        } else {
+            console.log('Account file is valid. Creating account options.');
+
+            // Create the account object.
+            return new Accounts(JSON.parse(fileData));
+        }
+    } else {
+        console.log('Account file nonexistent. Creating file.');
+
+        let accounts = new Accounts([]);
+
+        fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts), {encoding: 'utf8'});
+        return accounts;
+    }
+}
+
 function createStartupWindow() {
     mainWindow = new BrowserWindow({
         width: 800, height: 600, resizable: false, webPreferences: {
@@ -74,7 +150,7 @@ function createStartupWindow() {
     });
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools();
 }
 
 function createSettingsWindow() {
@@ -98,7 +174,7 @@ function createSettingsWindow() {
 
     settingsWindow.loadFile('settings.html');
 
-    settingsWindow.webContents.openDevTools();
+    // settingsWindow.webContents.openDevTools();
 
     // To avoid white flickering, show the window only when HTML has been loaded.
     settingsWindow.on('ready-to-show', () => {
@@ -115,7 +191,7 @@ function createSettingsWindow() {
 
 
 /**
- * FUNCTIONS FOR IPCMAIN
+ * FUNCTIONS FOR IPC MAIN
  */
 
 // Load calls
@@ -138,10 +214,14 @@ ipcMain.on('close:settings', () => {
     }
 })
 
+// Data calls
 ipcMain.handle('get:data', (event, dataType) => {
     switch (dataType) {
         case 'settings': {
             return new Settings().fillFromJson(getSettings())
+        } case 'accounts': {
+            console.log('Reading')
+            return getAccounts()
         }
     }
 });
