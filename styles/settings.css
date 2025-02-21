@@ -1,0 +1,58 @@
+
+body {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar {
+    width: 15%;
+    height: 100vh;
+
+    border-right: 1px solid rgb(255, 255, 255);
+
+    user-select: none;
+}
+
+#content {
+}
+
+#footer {
+    /* Set the footer to always be at the bottom of the screen. */
+    position: fixed;
+    bottom: 0;
+    /* Take up the remaining width of the screen from the sidebar. */
+    width: 85%;
+    /* Properly display the items inside. */
+    display: flex;
+    flex-direction: row;
+    /* Provide top line to separate from content. */
+    border-top: 1px solid rgb(255, 255, 255);
+}
+
+.sidebar-button {
+    display: block;
+    padding: 10px;
+
+    /*Configure the font */
+    font-size: 16px;
+    font-weight: bold;
+
+    vertical-align: center;
+    text-align: center;
+}
+
+.hover {
+    background-color: rgb(71, 78, 104);
+}
+
+.active {
+    background-color: rgb(80, 87, 122);
+    font-style: italic;
+}
+
+.content-section {
+    display: none;
+}
+
