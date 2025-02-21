@@ -64,4 +64,5 @@ body {
     background-color: rgb(80, 87, 122);
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
+    user-select: none;
 }

@@ -29,9 +29,20 @@ contextBridge.exposeInMainWorld('electron', {
     },
     invoke: (channel, data) => {
         const validChannels = {'get:data': ['settings', 'accounts']};
-        console.log(channel, data);
         if (Object.keys(validChannels).includes(channel)) {
             return ipcRenderer.invoke(channel, data);
+        }
+    },
+    protect: (channel, data) => {
+        const validChannels = ['password']
+        if(validChannels.includes(channel)) {
+            return ipcRenderer.invoke('protect:password', data);
+        }
+    },
+    store_data: (dataType, data) => {
+        const validDatatypes = ['account']
+        if(validDatatypes.includes(dataType)) {
+            return ipcRenderer.invoke('set:data', dataType, data);
         }
     },
     settingsUpdate: (callback) => {
