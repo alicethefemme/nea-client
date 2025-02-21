@@ -146,6 +146,10 @@ function addAccount(account) {
     fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts, null, 4), {encoding: 'utf8'});
 }
 
+/**
+ * Sets the setting file to the provided object.
+ * @param settings The settings object that is provided.
+ */
 function setSettings(settings) {
     const appData = app.getPath('userData');
     const settingFile = path.join(appData, 'settings.json');
