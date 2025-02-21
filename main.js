@@ -112,7 +112,7 @@ function getAccounts() {
             dialog.showErrorBox('Account file invalid', 'The account file is invalid!' +
                 `The following accounts are valid: ${accounts.getAccountNames()}. The app will proceed to load these into a new file.` );
 
-            fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts), {encoding: 'utf8'});
+            fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts, null, 4), {encoding: 'utf8'});
             return accounts
         } else {
             console.log('Account file is valid. Creating account options.');
@@ -125,7 +125,7 @@ function getAccounts() {
 
         let accounts = new Accounts([]);
 
-        fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts), {encoding: 'utf8'});
+        fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts, null, 4), {encoding: 'utf8'});
         return accounts;
     }
 }
@@ -143,7 +143,14 @@ function addAccount(account) {
 
     console.log(JSON.stringify(accounts));
 
-    fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts), {encoding: 'utf8'});
+    fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts, null, 4), {encoding: 'utf8'});
+}
+
+function setSettings(settings) {
+    const appData = app.getPath('userData');
+    const settingFile = path.join(appData, 'settings.json');
+
+    fs.writeFileSync(settingFile, JSON.stringify(settings.getValues(), null, 4), {encoding: 'utf8'});
 }
 
 function createStartupWindow() {
@@ -241,6 +248,10 @@ ipcMain.handle('set:data', (event, dataType, data) => {
         case 'account': {
             let account = new Account(data.name, data.ipAddr, data.username, data.password);
             addAccount(account);
+            return null;
+        }
+        case 'settings': {
+            setSettings(new Settings(data));
             return null;
         }
     }

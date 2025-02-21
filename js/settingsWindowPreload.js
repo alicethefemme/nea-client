@@ -11,4 +11,10 @@ contextBridge.exposeInMainWorld('electron', {
             ipcRenderer.send(channel, data);
         }
     },
+    store_data: (dataType, data) => {
+        const validDataTypes = ['settings']
+        if (validDataTypes.includes(dataType)) {
+            return ipcRenderer.invoke('set:data', dataType, data);
+        }
+    }
 })

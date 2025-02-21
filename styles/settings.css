@@ -54,5 +54,14 @@ body {
 
 .content-section {
     display: none;
+    padding: 5px;
+}
+
+#footer-setting-status-message {
+    width: 76%;
+    text-align: center;
+
+    color: rgb(150, 150, 150);
+    font-style: italic;
 }
 
