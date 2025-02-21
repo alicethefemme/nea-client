@@ -2,8 +2,9 @@ class Accounts {
     accounts = [];
     constructor(accounts) {
         for(let account of accounts) {
-            accounts.concat(new Account(account['name'], account['ipAddr'], account['username'], account['password']));
+            this.accounts.push(new Account(account['name'], account['ipAddr'], account['username'], account['password']));
         }
+        return this;
     }
 
     /**
@@ -17,6 +18,9 @@ class Accounts {
         }
 
         return accountNames;
+    }
+    addAccount(account) {
+        this.accounts.push(account);
     }
 }
 

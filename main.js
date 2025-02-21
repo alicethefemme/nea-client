@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain, dialog} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog, safeStorage} = require('electron')
 const path = require('node:path')
 const fs = require('node:fs')
 const {Settings} = require('./js/classes/settings')
@@ -135,6 +135,22 @@ function getAccounts() {
     }
 }
 
+/**
+ * Adds a new account to the account file.
+ * @param account {Account} the account you want to add to the file.
+ */
+function addAccount(account) {
+    const appData = app.getPath('userData');
+    const accountFile = path.join(appData, 'accounts.json');
+
+    let accounts = getAccounts();
+    accounts.addAccount(account);
+
+    console.log(JSON.stringify(accounts));
+
+    fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts), {encoding: 'utf8'});
+}
+
 function createStartupWindow() {
     mainWindow = new BrowserWindow({
         width: 800, height: 600, resizable: false, webPreferences: {
@@ -220,10 +236,30 @@ ipcMain.handle('get:data', (event, dataType) => {
         case 'settings': {
             return new Settings().fillFromJson(getSettings())
         } case 'accounts': {
-            console.log('Reading')
+            let accounts = getAccounts();
+            console.log(`${accounts.accounts}`);
             return getAccounts()
         }
     }
+});
+
+ipcMain.handle('set:data', (event, dataType, data) => {
+    switch (dataType) {
+        case 'account': {
+            let account = new Account(data.name, data.ipAddr, data.username, data.password);
+            addAccount(account);
+            return null;
+        }
+    }
+});
+
+ipcMain.handle('protect:password', (event, data) => {
+    if(process.platform === 'linux' && safeStorage.getSelectedStorageBackend() === 'basic_text') {
+        console.error('The system is not secure enough to run protective measures for user data. Closing application.');
+        process.exit(1);
+    }
+
+    return safeStorage.encryptString(data);
 });
 
 // This method will be called when Electron has finished
