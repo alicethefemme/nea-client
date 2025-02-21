@@ -15,15 +15,10 @@ let settingsWindow = null;
  * @returns {boolean} The validity of this content
  */
 function checkSettingsHeadersForValid(settingData) {
-    let settingsInfo = {
-        'reloadTime': Number, 'customLogPath': String
-    }
+    let settingsInfo = ['reloadTime', 'customLogPath']
 
-    for (let header of Object.keys(settingsInfo)) {
+    for (let header of settingsInfo) {
         if (!Object.keys(settingData).includes(header)) {
-            return false;
-        }
-        if (settingData[header].type !== settingsInfo[header]) {
             return false;
         }
     }
@@ -236,8 +231,6 @@ ipcMain.handle('get:data', (event, dataType) => {
         case 'settings': {
             return new Settings().fillFromJson(getSettings())
         } case 'accounts': {
-            let accounts = getAccounts();
-            console.log(`${accounts.accounts}`);
             return getAccounts()
         }
     }
