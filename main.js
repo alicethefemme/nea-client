@@ -147,6 +147,23 @@ function addAccount(account) {
 }
 
 /**
+ * Deletes the account provided to the server.
+ * @param accountToDelete {Account} The account name to delete from the accounts.
+ */
+function delAccount(accountToDelete) {
+    let accounts = getAccounts();
+
+    const deletedAccounts = new Accounts(accounts.accounts.filter((account) => {
+        return account.name !== accountToDelete;
+    }));
+
+    const appData = app.getPath('userData');
+    const accountFile = path.join(appData, 'accounts.json');
+
+    fs.writeFileSync(accountFile, JSON.stringify(deletedAccounts.accounts, null, 4), {encoding: 'utf8'});
+}
+
+/**
  * Sets the setting file to the provided object.
  * @param settings The settings object that is provided.
  */
@@ -257,6 +274,10 @@ ipcMain.handle('set:data', (event, dataType, data) => {
         case 'settings': {
             setSettings(new Settings(data));
             return null;
+        }
+        case 'delaccount': {
+            delAccount(data);
+            return;
         }
     }
 });

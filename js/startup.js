@@ -112,16 +112,13 @@ function editServer() {
         alert('Please select a valid server.');
     } else {
         window.electron.invoke('get:data', 'accounts').then((accounts) => {
-            for(let account of accounts) {
-                if(account.name === val) {
-                    document.getElementById('edit-server-modal-previous-server-name').value = account.name;
-                    document.getElementById('edit-server-modal-server-name').value = account.name;
-                    document.getElementById('edit-server-modal-server-address').value = account.ipAddr;
-                    document.getElementById('edit-server-modal-server-username').value = account.username;
-                    document.getElementById('edit-server-modal-server-password').value = account.password;
-                }
-            }
-        })
+            let account = accounts.accounts.find(account => account.name === val);
+                document.getElementById('edit-server-modal-previous-server-name').value = account.name;
+                document.getElementById('edit-server-modal-server-name').value = account.name;
+                document.getElementById('edit-server-modal-server-address').value = account.ipAddr;
+                document.getElementById('edit-server-modal-server-username').value = account.username;
+                document.getElementById('edit-server-modal-server-password').value = account.password;
+        });
 
         document.getElementById("edit-server-modal").style.display = "block"; // Show the modal
         document.title = editServerTitle; // Set the window title.
@@ -146,7 +143,8 @@ document.getElementById('edit-server-modal-submit-button').addEventListener('cli
     let serverPassword = document.getElementById('edit-server-modal-server-password').value;
 
     window.electron.invoke('get:data', 'accounts').then((accounts) => {
-        if(!accounts.getAccountByName(serverName)) {
+        let prevServer = accounts.accounts.find(account => account.name === previousServerName);
+        if(accounts.accounts.find(account => account.name === serverName) && serverName !== prevServer.name) {
             alert('Please enter a valid server name. This cannot be the same as any existing servers.');
             document.getElementById('edit-server-modal-server-name').focus();
             return;
@@ -155,10 +153,36 @@ document.getElementById('edit-server-modal-submit-button').addEventListener('cli
             alert('Please enter a valid server address. Comes in form: 0.0.0.0 where 0 is a number in range 0-255');
             document.getElementById('edit-server-modal-server-address').focus();
             return;
-        }
 
-        let prevServer = accounts.getAccountByName
-    })
+        }
+        let changedPassword = prevServer.password !== serverPassword;
+
+        window.electron.store_data('delaccount', previousServerName).then((_) => {
+            if (changedPassword) {
+                window.electron.protect('password', serverPassword).then((newPass) => {
+                    window.electron.store_data('account', {
+                        name: serverName,
+                        ipAddr: serverAddress,
+                        username: serverUsername,
+                        password: newPass
+                    }).then((_) => {
+                        setupServers();
+                        document.getElementById('edit-server-modal').style.display = 'none';
+                    });
+                });
+            } else {
+                window.electron.store_data('account', {
+                    name: serverName,
+                    ipAddr: serverAddress,
+                    username: serverUsername,
+                    password: serverPassword
+                }).then((_) => {
+                    setupServers();
+                    document.getElementById('edit-server-modal').style.display = 'none';
+                })
+            }
+        })
+    });
 })
 
 function connectServer() {

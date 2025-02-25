@@ -40,7 +40,7 @@ contextBridge.exposeInMainWorld('electron', {
         }
     },
     store_data: (dataType, data) => {
-        const validDatatypes = ['account']
+        const validDatatypes = ['account', 'delaccount']
         if(validDatatypes.includes(dataType)) {
             return ipcRenderer.invoke('set:data', dataType, data);
         }
