@@ -12,6 +12,8 @@ let gpuData = Array.from({length: 10}, () => Math.floor(Math.random() * 101));
 let ramLabels = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
 let ramData = Array.from({length: 10}, () => Math.floor(Math.random() * 101));
 
+let graphReloadTime = 15
+
 // The graph objects so that they are created.
 let cpuCreateGraph = new Chart(document.getElementById('overview-cpu'), {
     type: 'line',
@@ -79,9 +81,21 @@ let ramCreateGraph = new Chart(document.getElementById('overview-ram'), {
     }
 });
 
-// Reload the graphs every 15 seconds.
-setInterval(function() {
+// Reload the graphs.
+window.electron.invoke('get:data', 'settings').then((settings) => {
+    graphReloadTime = settings.reloadTime
+    let reloadGraphs = setInterval(reloadGraphHandler, getMilliseconds(graphReloadTime)); // Time out is in milliseconds.
 
+    window.electron.settingsUpdate((settings) => {
+        clearInterval(reloadGraphs);
+
+        graphReloadTime = settings.reloadTime;
+
+        reloadGraphs = setInterval(reloadGraphHandler, getMilliseconds(graphReloadTime));
+    })
+})
+
+function reloadGraphHandler() {
     let num = Math.floor(Math.random() * 101);
 
     // Data could be added like this, however I chose to use variables, as this is easier to manage.
@@ -97,8 +111,7 @@ setInterval(function() {
     cpuData.shift();
 
     cpuCreateGraph.update(); // Command used to update the graph, after affecting the data in it.
-
-}, getMilliseconds(1)) // Time out is in milliseconds.
+}
 
 /**
  * A function to return the milliseconds from seconds.

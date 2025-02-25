@@ -1,11 +1,11 @@
 {
-  "name": "foreign-team-allow-qllof",
-  "productName": "foreign-team-allow-qllof",
-  "description": "My Electron application description",
-  "keywords": [],
+  "name": "servercommander",
+  "productName": "Server Commander",
+  "description": "The all-in-one simple solution to manage servers.",
+  "keywords": ["server", "manage", "settings", "remote"],
   "main": "./main.js",
   "version": "1.0.0",
-  "author": "alicejoynson-ellis",
+  "author": "alicethefemme",
   "scripts": {
     "start": "electron ."
   },

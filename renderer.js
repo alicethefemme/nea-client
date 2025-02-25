@@ -47,7 +47,7 @@ window.onload = () => {
         };
         child.onclick = function () {
             if (child.id === 'sidebar-settings-button') { // Load the settings window on button press.
-                window.electron.send('load-settings');
+                window.electron.send('load:settings');
             }
             if (Object.keys(sidebarButtons).includes(child.id)) { // Check that it belongs to the submenu buttons.
 
