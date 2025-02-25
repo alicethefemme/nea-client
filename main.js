@@ -164,7 +164,7 @@ function createStartupWindow() {
         }
     })
 
-    mainWindow.loadFile('startup.html')
+    mainWindow.loadFile('./pages/startup.html')
 
     // Remove any references to the window provided that it is closed.
     mainWindow.on('closed', () => {
@@ -172,7 +172,7 @@ function createStartupWindow() {
     });
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 }
 
 function createSettingsWindow() {
@@ -194,7 +194,7 @@ function createSettingsWindow() {
         }
     });
 
-    settingsWindow.loadFile('settings.html');
+    settingsWindow.loadFile('./pages/settings.html');
 
     // settingsWindow.webContents.openDevTools();
 
@@ -222,7 +222,7 @@ ipcMain.on('load:main', () => {
     mainWindow.setSize(1280, 720);
     mainWindow.resizable = true;
 
-    mainWindow.loadFile("index.html");
+    mainWindow.loadFile("./pages/index.html");
 });
 
 ipcMain.on('load:settings', () => {
