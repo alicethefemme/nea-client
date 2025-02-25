@@ -19,6 +19,17 @@ class Accounts {
 
         return accountNames;
     }
+
+    /**
+     * Returns the account for the name provided.
+     * @param accountName The name of the account you want to get.
+     * @returns {Account|undefined} The account requested with the name. Void if nonexistent.
+     */
+    getAccountByName(accountName) {
+        this.accounts.find(account => account.name === accountName).then((val) => {
+            return val;
+        });
+    }
     addAccount(account) {
         this.accounts.push(account);
     }
