@@ -47,11 +47,17 @@ body {
     height: auto;
 }
 
-#add-server-modal h1, form {
+#add-server-modal h1 {
+    margin-left: 5%;
+}
+#add-server-modal-form {
     margin-left: 5%;
 }
 
-#edit-server-modal h1, form {
+#edit-server-modal h1 {
+    margin-left: 5%;
+}
+#edit-server-modal-form {
     margin-left: 5%;
 }
 

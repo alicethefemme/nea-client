@@ -31,7 +31,11 @@ setupServers()
 function setupServers() {
     const serverSelect = document.getElementById("server")
     window.electron.invoke('get:data', 'accounts').then((accounts) => {
-        console.log(accounts);
+        for (let child of serverSelect.children) {
+            if(child.value !== '') {
+                serverSelect.removeChild(child);
+            }
+        }
         for (let account of accounts.accounts) {
             let opt = document.createElement("option");
             opt.value = account.name;
@@ -62,9 +66,7 @@ function addServerBackButton() {
 /**
  * Gets the new server information and submits this.
  */
-document.getElementById('add-server-modal-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-
+document.getElementById('add-server-modal-submit-button').addEventListener('click', (event) => {
     let serverName = document.getElementById('add-server-modal-server-name').value;
     let serverAddress = document.getElementById('add-server-modal-server-address').value;
     let serverUsername = document.getElementById('add-server-modal-server-username').value;
@@ -74,12 +76,7 @@ document.getElementById('add-server-modal-form').addEventListener('submit', (eve
 
     if (!serverRegex.test(serverAddress)) {
         alert('Please enter a valid server address. Comes in form: 0.0.0.0 where 0 is a number in range 0-255');
-        for(let child of document.getElementById('add-server-modal-form').children) {
-            if(child.tagName.toUpperCase() === 'INPUT') {
-                console.log(child.attributes);
-            }
-        }
-        return false;
+        return;
     }
 
 
