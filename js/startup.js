@@ -33,11 +33,10 @@ setupServers()
 function setupServers() {
     const serverSelect = document.getElementById("server")
     window.electron.invoke('get:data', 'accounts').then((accounts) => {
-        for (let child of serverSelect.children) {
-            if(child.value !== '') {
-                serverSelect.removeChild(child);
-            }
-        }
+        serverSelect.children = new HTMLCollection();
+        let defaultOpt = new Option('Select Server', '', true, true);
+        defaultOpt.disabled = true;
+        serverSelect.appendChild(defaultOpt);
         for (let account of accounts.accounts) {
             let opt = document.createElement("option");
             opt.value = account.name;
@@ -75,7 +74,7 @@ document.getElementById('add-server-modal-submit-button').addEventListener('clic
     let serverPassword = document.getElementById('add-server-modal-server-password').value;
 
     window.electron.invoke('get:data', 'accounts').then((accounts) => {
-        if(!accounts.getAccountByName(serverName)) { // TODO: Make sure this is registered as a function.
+        if(accounts.accounts.find(account => account.name === serverName)) {
             alert('Please enter a valid server name. This cannot be the same as any existing servers.');
             document.getElementById('add-server-modal-server-name').focus();
             return;
@@ -98,7 +97,8 @@ document.getElementById('add-server-modal-submit-button').addEventListener('clic
             }).then((_) => {
                 setupServers();
                 document.getElementById('add-server-modal').style.display = "none";
-            }); // Redo the server setup once the accounts have been added back in.
+                document.getElementById('add-server-modal-form').reset();
+            });
         });
     });
 });
@@ -131,7 +131,6 @@ Function to return to home from the "Edit Server" modal.
 function editServerBackButton() {
     document.getElementById("edit-server-modal").style.display = "none"; // Hide the modal
     document.getElementById("edit-server-modal-form").reset(); // Reset the information in the form.
-    // TODO: Get the reset function working. IE change div back into a function.
     document.title = startupTitle; // Restore the startup title.
 }
 
@@ -179,6 +178,7 @@ document.getElementById('edit-server-modal-submit-button').addEventListener('cli
                 }).then((_) => {
                     setupServers();
                     document.getElementById('edit-server-modal').style.display = 'none';
+                    document.getElementById('edit-server-modal-form').reset();
                 })
             }
         })

@@ -2,15 +2,19 @@
   "name": "servercommander",
   "productName": "Server Commander",
   "description": "The all-in-one simple solution to manage servers.",
-  "keywords": ["server", "manage", "settings", "remote"],
+  "keywords": [
+    "server",
+    "manage",
+    "settings",
+    "remote"
+  ],
   "main": "./main.js",
   "version": "1.0.0",
   "author": "alicethefemme",
   "scripts": {
     "start": "electron ."
   },
-  "dependencies": {},
   "devDependencies": {
-    "electron": "33.3.0"
+    "electron": "^33.3.0"
   }
 }

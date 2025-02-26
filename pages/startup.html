@@ -11,10 +11,10 @@
 <body>
 <h1 id="title"> Select Server </h1>
 <div id="server-select-container">
-    <div id="server-select-drop">
+    <div id="server-select-drop" style="display: flex; flex-direction: row">
         <!-- Dropdown menu for which server to use -->
         <label for="server" hidden>Select server</label>
-        <select name="Server" id="server">
+        <select name="Server" id="server" style="flex-grow: 1">
             <option value="" disabled selected>Select Server</option> <!-- Placeholder text -->
             <!-- The options below will be autopopulated with options from the datastore -->
         </select>
@@ -23,6 +23,7 @@
     <div id="server-select-buttons">
         <button type="button" id="addServer"> Add Server</button>
         <button type="button" id="editServer"> Edit Server</button>
+        <button type="button" id="deleteServer"><span class="material-icons">delete</span></button>
     </div>
 </div>
 
