@@ -33,10 +33,6 @@ body {
     margin-top: 2px;
 }
 
-#server-select-buttons button {
-    width: 50%;
-}
-
 #server-select-container button, select {
     /* Change the size of these elements individually to better match the page */
     font-size: 100%;

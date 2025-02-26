@@ -33,15 +33,16 @@ setupServers()
 function setupServers() {
     const serverSelect = document.getElementById("server")
     window.electron.invoke('get:data', 'accounts').then((accounts) => {
-        serverSelect.children = new HTMLCollection();
+        for(let i = serverSelect.options.length -1; i >=0; i--) {
+            serverSelect.options.remove(i);
+        }
+
         let defaultOpt = new Option('Select Server', '', true, true);
         defaultOpt.disabled = true;
         serverSelect.appendChild(defaultOpt);
+
         for (let account of accounts.accounts) {
-            let opt = document.createElement("option");
-            opt.value = account.name;
-            opt.innerHTML = account.name;
-            serverSelect.appendChild(opt);
+            serverSelect.appendChild(new Option(account.name, account.name, false, false));
         }
     });
 }
@@ -163,7 +164,7 @@ document.getElementById('edit-server-modal-submit-button').addEventListener('cli
                         name: serverName,
                         ipAddr: serverAddress,
                         username: serverUsername,
-                        password: newPass
+                        password: btoa(newPass)
                     }).then((_) => {
                         setupServers();
                         document.getElementById('edit-server-modal').style.display = 'none';
@@ -183,6 +184,17 @@ document.getElementById('edit-server-modal-submit-button').addEventListener('cli
             }
         })
     });
+});
+
+document.getElementById('deleteServer').addEventListener('click', () => {
+    const val = document.getElementById('server').value;
+    if(val === "") {
+        alert('Please select a valid server!');
+    } else {
+        window.electron.store_data('delaccount', val).then(_ => {
+            setupServers();
+        })
+    }
 })
 
 function connectServer() {

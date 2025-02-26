@@ -141,8 +141,6 @@ function addAccount(account) {
     let accounts = getAccounts();
     accounts.addAccount(account);
 
-    console.log(JSON.stringify(accounts));
-
     fs.writeFileSync(accountFile, JSON.stringify(accounts.accounts, null, 4), {encoding: 'utf8'});
 }
 
