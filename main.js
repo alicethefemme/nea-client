@@ -4,6 +4,7 @@ const path = require('node:path')
 const fs = require('node:fs')
 const {Settings} = require('./js/classes/settings')
 const {Accounts, Account} = require('./js/classes/account')
+const {APIConnection} = require('./js/classes/apiConnect')
 
 // Define windows here so we can use them between functions.
 let mainWindow;
@@ -292,8 +293,16 @@ ipcMain.handle('protect:password', (event, data) => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-  createStartupWindow()
+app.whenReady().then(async() => {
+    createStartupWindow()
+    // CODE EXAMPLE FOR API CONNECTION
+//    let connection = await APIConnection.init('aliceje', 'testtest', '127.0.0.1:5000')
+//
+//
+//    if(connection) {
+//        console.log(connection.token);
+//    }
+
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
