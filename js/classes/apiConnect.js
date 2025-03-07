@@ -27,6 +27,10 @@ class APIConnection {
 
         return new APIConnection(response.headers.get('XAuthToken'), addr);
     }
+
+    async getData(dataType) {
+
+    }
 }
 
 module.exports = {

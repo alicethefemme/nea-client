@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block">
+        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="../styles/startup.css">
+        <link rel='stylesheet' href='../styles/tfa.css'>
+        <title>Server Commander - Verify with your 2FA Method</title>
+    </head>
+    <body>
+        <div id='tfa-email' class='security-option'>
+            <h1> Please verify with a code sent to your email</h1>
+            <div id='tfa-email-code-container' class='seccode'>
+                <!-- Javascript is used here to put the code elements in automatically, and automatically shift between them when input has been added.-->
+            </div>
+            <p id='tfa-email-status-message' class='status-message'></p>
+        </div>
+        <div id='tfa-totp' class='security-option'>
+            <h1> Please verify with a code from your TOTP Authenticator</h1>
+            <div id='tfa-totp-code-container' class='seccode'>
+                <!-- Javascript is used here to put the code elements in automatically, and automatically shift between them when input has been added.-->
+            </div>
+            <p id='tfa-totp-status-message' class='status-message'></p>
+        </div>
+        <div id='tfa-seckey' class='security-option'>
+            <h1> Please verify by using your 2FA Security Key</h1>
+            <p id='tfa-seckey-status-message' class='status-message'></p>
+        </div>
+        <script src='../js/tfa.js'></script>
+    </body>
+</html>

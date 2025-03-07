@@ -1,0 +1,11 @@
+.security-option {
+    display: none;
+
+    flex-direction: row;
+}
+
+.status-message {
+    font-style: italic;
+    color: rgb(255, 0, 0);
+}
+

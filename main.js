@@ -295,12 +295,13 @@ ipcMain.handle('protect:password', (event, data) => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(async() => {
     createStartupWindow()
-    let connection = await APIConnection.init('aliceje', 'testtest', '127.0.0.1:5000')
-
-    
-    if(connection) {
-        console.log(connection.token);
-    }
+    // CODE EXAMPLE FOR API CONNECTION
+//    let connection = await APIConnection.init('aliceje', 'testtest', '127.0.0.1:5000')
+//
+//
+//    if(connection) {
+//        console.log(connection.token);
+//    }
 
 
   app.on('activate', function () {
