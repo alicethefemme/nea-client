@@ -1,5 +1,9 @@
 name: Build and Publish Server Commander
 
+permissions:
+  contents: write  # Allows publishing releases
+  packages: write
+
 on:
   push:
     tags:
