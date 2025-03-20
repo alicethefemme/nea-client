@@ -18,6 +18,7 @@
     "electron": "^33.3.0"
   },
   "dependencies": {
+    "electron-builder": "^25.1.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }
