@@ -12,7 +12,10 @@
   "version": "0.1.0",
   "author": "alicethefemme",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder --dir",
+    "dist": "electron-builder",
+    "publish": "electron-builder --publish always"
   },
   "devDependencies": {
     "electron": "^33.3.0"
@@ -21,5 +24,24 @@
     "electron-builder": "^25.1.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "build": {
+    "appId": "com.servercommander.client",
+    "productName": "Server Commander Client",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "publish":{
+      "provider": "github"
+    }
   }
 }
