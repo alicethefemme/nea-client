@@ -18,10 +18,10 @@
     "publish": "electron-builder --publish always"
   },
   "devDependencies": {
-    "electron": "^33.3.0"
+    "electron": "^33.3.0",
+    "electron-builder": "^25.1.8"
   },
   "dependencies": {
-    "electron-builder": "^25.1.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
