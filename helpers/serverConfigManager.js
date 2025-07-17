@@ -1,6 +1,5 @@
 import errorAlert, { softErrorAlert } from "@/helpers/errorManager";
 import { Buffer } from "buffer";
-import CryptoES from "crypto-es";
 import CryptoJS from "crypto-js";
 import * as Crypto from "expo-crypto";
 import * as SecureStore from "expo-secure-store";
@@ -66,8 +65,8 @@ class ServerStore {
     const name = serverObject.name;
     const ip = serverObject.ip;
     const port = serverObject.port;
-    const username = await encrypt(serverObject.username);
-    const password = await encrypt(serverObject.password);
+    const username = encrypt(serverObject.username);
+    const password = encrypt(serverObject.password);
 
     // Update the database.
     try {
@@ -139,38 +138,40 @@ async function getKey() {
 /**
  * Encrypts any text to be stored in the database.
  * @param {String} text The text value of the object you want to encrypt.
- * @returns {Promise<String>} The encrypted value of the text.
+ * @returns {String} The encrypted value of the text.
  */
 // TODO: Figure out what the issue is with encrypting values.
-async function encrypt(text) {
+function encrypt(text) {
   // Get the key from storage.
-  const encodedKey = await getKey();
+  // const encodedKey = await getKey();
 
   // Log the value that needs encrypting.
-  console.log("Value to encrypt:", text);
+  // console.log("Value to encrypt:", text);
 
-  try {
-    console.log("TEXT: ", text);
-    console.log("ENCODED KEY: ", encodedKey);
-    console.log(await CryptoES.AES.encrypt(text, encodedKey));
-  } catch (e) {
-    console.log(e.stack);
-  }
+  // try {
+    // console.log("TEXT: ", text);
+    // console.log("ENCODED KEY: ", encodedKey);
+    // console.log(await CryptoES.AES.encrypt(text, encodedKey));
+  // } catch (e) {
+    // console.log(e.stack);
+  // }
 
-  return CryptoES.AES.encrypt(text, encodedKey).toString();
+  // return CryptoES.AES.encrypt(text, encodedKey).toString();
+  return text;
 }
 
 /**
  * Decrypts any text stored in the database.
  * @param {String} text The text stored in the database.
- * @returns {Promise<String>} The decrypted value of the text.
+ * @returns {String} The decrypted value of the text.
  */
-async function decrypt(text) {
-  const encodedKey = await getKey();
+function decrypt(text) {
+  // const encodedKey = await getKey();
 
-  const bytes = CryptoJS.AES.decrypt(text, encodedKey);
+  // const bytes = CryptoJS.AES.decrypt(text, encodedKey);
 
-  return bytes.toString();
+  // return bytes.toString();
+  return text;
 }
 
 const serverStore = new ServerStore();
