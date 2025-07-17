@@ -48,3 +48,13 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+# Welcome to Server Commander (Client) repo!
+This is a project built by alicethefemme, designed for homelabbers and small businesses to monitor servers on the go! This project utilizes React Native and Expo to create the mobile application used to manage servers, and provide the security to do so with peace of mind.
+
+## How to run this
+The development build can be ran in a multitude of ways:
+1. Expo Snack to view the code online on a mobile (Doesn't offer connectivity)
+This option is available for those who don't have a mobile device or an android emulator to be able to test this application. It allows for you to visualise the code online, and get a preview of the display and the code, whilst also providing you the ability to modify certain elements in real time.
+**The *web* version of this code doesn't work! This application is designed purely for mobile (Android and iOS)**.
+A link to access the online expo snack can be found [here.]()
