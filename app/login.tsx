@@ -123,19 +123,16 @@ export default function LoginScreen() {
     const sItem = selectedServer;
 
     if (!sItem) {
-      console.log("Oh no! Nothing selected");
+      console.warn("No server has been selected for login!");
       softErrorAlert("No valid server has been selected!");
       return;
     }
 
-    console.log(sItem);
 
     // Decrypt the username and password.
     // TODO: Figure out the issue with the encrypted password being decrypted.
     const decryptedUsername = await ServerStore.decryptInfo(sItem.username);
     const decryptedPassword = await ServerStore.decryptInfo(sItem.password);
-
-    console.log("Decrypted pass: ", decryptedPassword);
 
     const server = new Server(
       sItem.ip,
@@ -144,13 +141,21 @@ export default function LoginScreen() {
       decryptedPassword
     );
 
+    // Verify if the server is online and valid.
     setLoading(true);
     const result = await server.ping();
-    setLoading(false);
     if (!result) {
+      setLoading(false);
       softErrorAlert(
-        "The server your are attemting to log into is not online! Please try again later."
+        "The server your are attemting to log into is not online or not a valid server! Please try again later."
       );
+      return;
+    }
+
+    // Begin sending the login.
+    const loginResult = await server.login();
+    if(!loginResult) {
+      setLoading(false);
       return;
     }
   };
